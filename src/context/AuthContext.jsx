@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
           return;
         }
 
-        const { data } = await api.get("/me");
+        const { data } = await api.get("/auth/me");
 
         setUser(data.user);
       } catch (error) {
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   // Login
   const login = async (email, password) => {
-    const { data } = await api.post("/login", {
+    const { data } = await api.post("/auth/login", {
       email,
       password,
     });
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 
   // Register
   const register = async (formData) => {
-    const { data } = await api.post("/register", formData);
+    const { data } = await api.post("/auth/register", formData);
     return data;
   };
 
