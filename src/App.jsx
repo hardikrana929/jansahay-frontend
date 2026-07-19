@@ -10,6 +10,7 @@ import Schemes from "./pages/Schemes";
 import Recommendations from "./pages/Recommendations";
 import Favorites from "./pages/Favorites";
 import SchemeDetails from "./pages/SchemeDetails";
+import NotFound from "./pages/NotFound";
 
 import AdminDashboard from "./pages/admin/Dashboard";
 import AddScheme from "./pages/admin/AddScheme";
@@ -90,7 +91,7 @@ function App() {
           </ProtectedRoute>
         }
       />
-      
+
       {/* Admin */}
       <Route
         path="/admin/dashboard"
@@ -127,6 +128,7 @@ function App() {
           </AdminRoute>
         }
       />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
