@@ -109,9 +109,11 @@ const ManageSchemes = () => {
 
                     <button
                       onClick={() => handleToggle(scheme._id)}
-                      className={`text-sm font-medium ${
-                        scheme.isActive ? "text-red-600" : "text-green-600"
-                      } hover:underline`}
+                      className={`px-4 py-2 rounded-lg text-white font-medium transition duration-200 ${
+                        scheme.isActive
+                          ? "bg-red-600 hover:bg-red-700"
+                          : "bg-green-600 hover:bg-green-700"
+                      }`}
                     >
                       {scheme.isActive ? "Deactivate" : "Activate"}
                     </button>
