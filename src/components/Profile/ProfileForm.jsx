@@ -14,6 +14,7 @@ import {
 
 import Input from "../common/Input";
 import SelectInput from "../common/SelectInput";
+import { State, City } from "country-state-city";
 
 const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
   return (
@@ -49,20 +50,30 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
             ]}
           />
 
-          <Input
+          <SelectInput
             label="State"
             name="state"
             value={formData.state}
             onChange={handleChange}
             icon={FaMapMarkerAlt}
+            options={State.getStatesOfCountry("IN").map((state) => ({
+              value: state.isoCode,
+              label: state.name,
+            }))}
           />
 
-          <Input
+          <SelectInput
             label="District"
             name="district"
             value={formData.district}
             onChange={handleChange}
             icon={FaCity}
+            options={City.getCitiesOfState("IN", formData.state).map(
+              (city) => ({
+                value: city.name,
+                label: city.name,
+              }),
+            )}
           />
 
           <SelectInput

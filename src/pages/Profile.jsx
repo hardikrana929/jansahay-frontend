@@ -8,7 +8,7 @@ import PageHeader from "../components/common/PageHeader";
 import ProfileCard from "../components/Profile/ProfileCard";
 import ProfileForm from "../components/Profile/ProfileForm";
 import ProfileProgress from "../components/Profile/ProfileProgress";
-
+import { State } from "country-state-city";
 import { useAuth } from "../context/AuthContext";
 
 import {
@@ -88,23 +88,21 @@ const Profile = () => {
     e.preventDefault();
 
     try {
-      setSaving(true);
+      const selectedState = State.getStateByCodeAndCountry(
+        formData.state,
+        "IN",
+      );
 
-      if (profileExist) {
-        const res = await updateProfile(formData);
+      const payload = {
+        ...formData,
+        state: selectedState.name, // Save "Gujarat" instead of "GJ"
+      };
 
-        toast.success(res.message);
-      } else {
-        const res = await createProfile(formData);
+      await createProfile(payload);
 
-        toast.success(res.message);
-
-        setProfileExist(true);
-      }
+      toast.success("Profile saved");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong");
-    } finally {
-      setSaving(false);
+      toast.error("Failed");
     }
   };
 
