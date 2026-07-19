@@ -1,10 +1,9 @@
 import api from "./api";
 
-export const getSchemes = async (page = 1) => {
-
-  const { data } = await api.get(
-    `/schemes?page=${page}&limit=12`
-  );
+export const getSchemes = async (params) => {
+  const { data } = await api.get("/schemes", {
+    params,
+  });
 
   return data;
 };

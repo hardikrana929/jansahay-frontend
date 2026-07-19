@@ -7,6 +7,8 @@ const SchemeFilter = ({
   setSchemeType,
   government,
   setGovernment,
+  sort,
+  setSort,
 }) => {
   return (
     <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-6 mb-8">
@@ -15,7 +17,7 @@ const SchemeFilter = ({
         <h2 className="text-xl font-bold text-gray-800">Search & Filter</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
         {/* Search */}
 
         <div className="relative">
@@ -70,6 +72,14 @@ const SchemeFilter = ({
           <option value="Central">Central Government</option>
 
           <option value="State">State Government</option>
+        </select>
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+          className="rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+        >
+          <option value="latest">Latest First</option>
+          <option value="oldest">Oldest First</option>
         </select>
       </div>
     </div>
