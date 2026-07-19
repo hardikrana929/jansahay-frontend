@@ -14,7 +14,14 @@ const Navbar = () => {
     <nav className="bg-white shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-5 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-blue-600">
-          JanSahay
+          <div className="flex justify-center gap-2 items-center">
+            <img
+              src="https://res.cloudinary.com/ddn203hk8/image/upload/v1784436547/JanSahayLogo_k7xuxm.png"
+              alt="logo"
+              width="50"
+            />
+            JanSahay
+          </div>
         </Link>
 
         <div className="flex gap-6 items-center">

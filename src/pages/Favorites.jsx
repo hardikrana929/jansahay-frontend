@@ -55,11 +55,11 @@ const Favorites = () => {
 
   const filteredFavorites = useMemo(() => {
     return favorites.filter((item) => {
-      const scheme = item.scheme;
+      if (!item.scheme) return false;
 
       return (
-        scheme.title.toLowerCase().includes(search.toLowerCase()) ||
-        scheme.description.toLowerCase().includes(search.toLowerCase())
+        item.scheme.title.toLowerCase().includes(search.toLowerCase()) ||
+        item.scheme.description.toLowerCase().includes(search.toLowerCase())
       );
     });
   }, [favorites, search]);

@@ -36,12 +36,16 @@ const Recommendation = () => {
         getFavorites(),
       ]);
 
-      setRecommendations(recommendationRes.recommendations || []);
+      setRecommendations(recommendationRes.recommendation || []);
 
-      const favoriteIds = favoriteRes.favorite.map((item) => item.scheme._id);
+      const favoriteIds = (favoriteRes.favorite || [])
+        .filter((item) => item.scheme)
+        .map((item) => item.scheme._id);
 
       setFavorites(favoriteIds);
     } catch (error) {
+      console.error(error);
+
       toast.error(
         error.response?.data?.message || "Unable to load recommendations.",
       );

@@ -27,11 +27,14 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
           </div>
 
           <button
-            className="transition transform hover:scale-125"
             onClick={() => onFavorite(scheme._id)}
-            className="text-2xl"
+            className="w-8 h-8 flex items-center justify-center rounded-full"
           >
-            {favorite ? <FaHeart className="text-red-300" /> : <FaRegHeart />}
+            {favorite ? (
+              <FaHeart className="text-red-500 text-2xl" />
+            ) : (
+              <FaRegHeart className="text-white text-2xl" />
+            )}
           </button>
         </div>
       </div>

@@ -8,10 +8,13 @@ import PageHeader from "../components/common/PageHeader";
 import SchemeCard from "../components/schemes/SchemeCard";
 import SchemeFilter from "../components/schemes/SchemeFilter";
 import EmptyScheme from "../components/schemes/EmptyScheme";
-
+import Pagination from "../components/common/Pagination";
 import { getSchemes } from "../services/schemeService";
 
 const Schemes = () => {
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   const [loading, setLoading] = useState(true);
 
   const [schemes, setSchemes] = useState([]);
@@ -25,6 +28,25 @@ const Schemes = () => {
   useEffect(() => {
     fetchSchemes();
   }, []);
+  useEffect(() => {
+    loadSchemes();
+  }, [page]);
+
+  const loadSchemes = async () => {
+    setLoading(true);
+
+    try {
+      const res = await getSchemes(page);
+
+      setSchemes(res.schemes);
+
+      setTotalPages(res.totalPages);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchSchemes = async () => {
     try {
@@ -84,10 +106,17 @@ const Schemes = () => {
       {filteredSchemes.length === 0 ? (
         <EmptyScheme />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
-          {filteredSchemes.map((scheme) => (
-            <SchemeCard key={scheme._id} scheme={scheme} />
-          ))}
+        <div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {schemes.map((scheme) => (
+              <SchemeCard key={scheme._id} scheme={scheme} />
+            ))}
+          </div>
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPageChange={setPage}
+          />
         </div>
       )}
     </MainLayout>
