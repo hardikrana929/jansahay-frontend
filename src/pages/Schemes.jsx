@@ -61,49 +61,51 @@ const Schemes = () => {
   }
 
   return (
-    <MainLayout>
-      <PageHeader
-        title="Government Schemes"
-        subtitle="Browse all available government schemes."
-      />
+    <>
+      <MainLayout>
+        <PageHeader
+          title="Government Schemes"
+          subtitle="Browse all available government schemes."
+        />
 
-      <SchemeFilter
-        search={search}
-        setSearch={setSearch}
-        schemeType={schemeType}
-        setSchemeType={setSchemeType}
-        government={government}
-        setGovernment={setGovernment}
-        sort={sort}
-        setSort={setSort}
-      />
+        <SchemeFilter
+          search={search}
+          setSearch={setSearch}
+          schemeType={schemeType}
+          setSchemeType={setSchemeType}
+          government={government}
+          setGovernment={setGovernment}
+          sort={sort}
+          setSort={setSort}
+        />
 
-      <div className="flex justify-between items-center mt-8 mb-5">
-        <h2 className="text-2xl font-bold">Available Schemes</h2>
+        <div className="flex justify-between items-center mt-8 mb-5">
+          <h2 className="text-2xl font-bold">Available Schemes</h2>
 
-        <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
-          {schemes.length} Schemes
-        </span>
-      </div>
+          <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
+            {schemes.length} Schemes
+          </span>
+        </div>
 
-      {schemes.length === 0 ? (
-        <EmptyScheme />
-      ) : (
-        <>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {schemes.map((scheme) => (
-              <SchemeCard key={scheme._id} scheme={scheme} />
-            ))}
-          </div>
+        {schemes.length === 0 ? (
+          <EmptyScheme />
+        ) : (
+          <>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {schemes.map((scheme) => (
+                <SchemeCard key={scheme._id} scheme={scheme} />
+              ))}
+            </div>
 
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            onPageChange={setPage}
-          />
-        </>
-      )}
-    </MainLayout>
+            <Pagination
+              page={page}
+              totalPages={totalPages}
+              onPageChange={setPage}
+            />
+          </>
+        )}
+      </MainLayout>
+    </>
   );
 };
 

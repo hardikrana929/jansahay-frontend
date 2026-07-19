@@ -92,7 +92,7 @@ const Hero = () => {
           <img
             src={heroImage}
             alt="Person reviewing government scheme documents on JanSahay"
-            className="w-72 md:w-250 drop-shadow-2xl"
+            className="w-72 md:w-250 drop-shadow-2xl rounded-2xl"
           />
         </motion.div>
       </div>

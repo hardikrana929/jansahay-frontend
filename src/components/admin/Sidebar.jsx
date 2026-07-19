@@ -21,6 +21,11 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       icon: <FaClipboardList />,
     },
     {
+      title: "Show All Schemes",
+      path: "/schemes",
+      icon: <FaClipboardList />,
+    },
+    {
       title: "Create Scheme",
       path: "/admin/add-scheme",
       icon: <FaPlusCircle />,

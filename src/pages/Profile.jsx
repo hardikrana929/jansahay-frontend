@@ -113,31 +113,33 @@ const Profile = () => {
   }
 
   return (
-    <MainLayout>
-      <PageHeader
-        title="My Profile"
-        subtitle="Complete your profile to receive accurate government scheme recommendations."
-      />
+    <>
+      <MainLayout>
+        <PageHeader
+          title="My Profile"
+          subtitle="Complete your profile to receive accurate government scheme recommendations."
+        />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Side */}
-        <div className="space-y-6">
-          <ProfileCard user={user} profile={formData} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Side */}
+          <div className="space-y-6">
+            <ProfileCard user={user} profile={formData} />
 
-          <ProfileProgress profile={formData} />
+            <ProfileProgress profile={formData} />
+          </div>
+
+          {/* Right Side */}
+          <div className="lg:col-span-2">
+            <ProfileForm
+              formData={formData}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              loading={saving}
+            />
+          </div>
         </div>
-
-        {/* Right Side */}
-        <div className="lg:col-span-2">
-          <ProfileForm
-            formData={formData}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            loading={saving}
-          />
-        </div>
-      </div>
-    </MainLayout>
+      </MainLayout>
+    </>
   );
 };
 

@@ -14,7 +14,7 @@ const RecommendationCard = ({ scheme }) => {
 
       <div className="flex flex-wrap gap-3 mt-5">
         <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
-          {scheme.category}
+          {scheme.categorys}
         </span>
 
         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm flex items-center gap-1">
