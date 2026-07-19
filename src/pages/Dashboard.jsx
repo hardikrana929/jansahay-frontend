@@ -55,14 +55,24 @@ const Dashboard = () => {
           getSchemes(),
         ]);
 
-      setProfile(profileRes.profile);
+      console.log("Profile:", profileRes);
+      console.log("Recommendations:", recommendationRes);
+      console.log("Favorites:", favoriteRes);
+      console.log("Schemes:", schemeRes);
 
-      setRecommendations(recommendationRes.recommendations || []);
+      setProfile(profileRes.profile || null);
 
-      setFavorites(favoriteRes.favorites || []);
+      // Recommendation API returns "recommendation"
+      setRecommendations(recommendationRes.recommendation || []);
 
+      // Favorite API returns "favorite"
+      setFavorites(favoriteRes.favorite || []);
+
+      // Schemes API returns "schemes"
       setSchemes(schemeRes.schemes || []);
     } catch (error) {
+      console.error(error);
+
       toast.error(error.response?.data?.message || "Unable to load dashboard.");
     } finally {
       setLoading(false);
