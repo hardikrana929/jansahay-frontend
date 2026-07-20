@@ -15,15 +15,15 @@ const SchemeDetailsCard = ({ scheme }) => {
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
       {/* Header */}
 
-      <div className="bg-gradient-to-r from-blue-600 to-green-500 text-white p-8">
-        <h1 className="text-3xl font-bold">{scheme.title}</h1>
+      <div className="bg-gradient-to-r from-blue-600 to-green-500 text-white p-5 sm:p-8">
+        <h1 className="text-2xl sm:text-3xl font-bold">{scheme.title}</h1>
 
         <p className="mt-2 text-blue-100">{scheme.description}</p>
       </div>
 
       {/* Body */}
 
-      <div className="p-8 space-y-8">
+      <div className="p-5 sm:p-8 space-y-8">
         {/* Basic Information */}
 
         <section>

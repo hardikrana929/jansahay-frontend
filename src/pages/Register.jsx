@@ -72,7 +72,7 @@ const Register = () => {
 
           <form
             onSubmit={handleSubmit}
-            className="bg-white shadow-xl rounded-2xl p-8 border border-gray-100"
+            className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100"
           >
             <h2 className="text-2xl font-bold text-gray-800 mb-1">
               Create account

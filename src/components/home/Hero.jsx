@@ -28,7 +28,7 @@ const Hero = () => {
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
       <div className="absolute -bottom-32 -left-16 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
 
-      <div className="relative max-w-7xl mx-auto px-5 py-20 md:py-15 grid md:grid-cols-2 gap-12 items-center">
+      <div className="relative max-w-7xl mx-auto px-5 py-14 sm:py-20 md:py-16 grid md:grid-cols-2 gap-10 md:gap-12 items-center">
         {/* Left: copy */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -39,7 +39,7 @@ const Hero = () => {
             Helping Every Citizen Discover the Government Benefits They Deserve.
           </span>
 
-          <h1 className="mt-6 text-4xl md:text-6xl font-bold leading-tight">
+          <h1 className="mt-6 text-3xl sm:text-4xl md:text-6xl font-bold leading-tight">
             Find Government Schemes
             <br />
             Made For You
@@ -92,7 +92,7 @@ const Hero = () => {
           <img
             src={heroImage}
             alt="Person reviewing government scheme documents on JanSahay"
-            className="w-72 md:w-250 drop-shadow-2xl rounded-2xl"
+            className="w-full max-w-[280px] sm:max-w-sm md:max-w-full drop-shadow-2xl rounded-2xl"
           />
         </motion.div>
       </div>

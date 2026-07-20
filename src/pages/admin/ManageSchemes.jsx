@@ -51,7 +51,7 @@ const ManageSchemes = () => {
 
   return (
     <AdminLayout>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-wrap gap-3 items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Manage Schemes</h1>
 
         <Link

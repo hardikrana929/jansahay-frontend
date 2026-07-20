@@ -19,7 +19,7 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl shadow-md p-8 space-y-8 border border-gray-100"
+      className="bg-white rounded-2xl shadow-md p-5 sm:p-8 space-y-8 border border-gray-100"
     >
       <div>
         <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
