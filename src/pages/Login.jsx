@@ -79,10 +79,10 @@ const Login = () => {
             onSubmit={handleSubmit}
             className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100"
           >
-            <h2 className="text-2xl font-bold text-gray-800 mb-1">
+            <h2 className="text-2xl font-bold text-gray-800 mb-1 text-center">
               Welcome back
             </h2>
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-500 mb-6 text-center">
               Login to continue to your dashboard
             </p>
 
