@@ -42,6 +42,9 @@ const Register = () => {
     if (!form.name || !form.email || !form.password) {
       return toast.error("Please fill all fields");
     }
+    if(form.password.length < 6){
+      return toast.error("Please Enter 6 charecter or above.");
+    }
 
     try {
       setLoading(true);
