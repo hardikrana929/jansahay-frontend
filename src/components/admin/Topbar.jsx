@@ -1,6 +1,6 @@
 import { FaBell, FaUserCircle } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from '../common/LanguageSwitcher'
+
 const Topbar = ({ admin }) => {
   const { t } = useTranslation();
 
@@ -44,9 +44,6 @@ const Topbar = ({ admin }) => {
                 {admin?.email || "admin@example.com"}
               </p>
             </div>
-            <div className="pl-2 border-l border-gray-200">
-            <LanguageSwitcher />
-          </div>
           </div>
         </div>
       </div>

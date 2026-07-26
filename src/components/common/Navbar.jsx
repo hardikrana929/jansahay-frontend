@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -22,12 +23,12 @@ const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className="bg-white shadow sticky top-0 z-50">
+    <nav className="bg-white dark:bg-gray-900 dark:text-gray-100 shadow sticky top-0 z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-5 py-4 flex justify-between items-center">
         <Link
           to="/"
           onClick={closeMenu}
-          className="text-xl sm:text-2xl font-bold text-blue-600 shrink-0"
+          className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400 shrink-0"
         >
           <div className="flex justify-center gap-2 items-center">
             <img
@@ -64,7 +65,7 @@ const Navbar = () => {
 
           {!user ? (
             <>
-              <Link to="/login" className="text-blue-600">
+              <Link to="/login" className="text-blue-600 dark:text-blue-400">
                 {t("nav.login")}
               </Link>
 
@@ -90,15 +91,15 @@ const Navbar = () => {
             </>
           )}
 
-          <div className="pl-2 border-l border-gray-200">
+          <div className="pl-2 border-l border-gray-200 dark:border-gray-700 flex items-center gap-3">
+            <ThemeSwitcher />
             <LanguageSwitcher />
           </div>
-          <Link to="/feedback">{t("nav.feedback")}</Link>
         </div>
 
         {/* Mobile menu toggle */}
         <button
-          className="lg:hidden text-2xl text-blue-600"
+          className="lg:hidden text-2xl text-blue-600 dark:text-blue-400"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label="Toggle menu"
         >
@@ -112,11 +113,11 @@ const Navbar = () => {
           isOpen ? "max-h-[32rem]" : "max-h-0"
         }`}
       >
-        <div className="px-4 sm:px-5 pb-5 pt-1 flex flex-col gap-1 border-t border-gray-100">
+        <div className="px-4 sm:px-5 pb-5 pt-1 flex flex-col gap-1 border-t border-gray-100 dark:border-gray-700">
           <Link
             to="/"
             onClick={closeMenu}
-            className="py-3 px-2 rounded-lg hover:bg-gray-50"
+            className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
           >
             {t("nav.home")}
           </Link>
@@ -124,7 +125,7 @@ const Navbar = () => {
           <Link
             to="/schemes"
             onClick={closeMenu}
-            className="py-3 px-2 rounded-lg hover:bg-gray-50"
+            className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
           >
             {t("nav.schemes")}
           </Link>
@@ -134,7 +135,7 @@ const Navbar = () => {
               <Link
                 to={user.role === "admin" ? "/admin/dashboard" : "/dashboard"}
                 onClick={closeMenu}
-                className="py-3 px-2 rounded-lg hover:bg-gray-50"
+                className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
               >
                 {t("nav.dashboard")}
               </Link>
@@ -142,7 +143,7 @@ const Navbar = () => {
               <Link
                 to="/recommendations"
                 onClick={closeMenu}
-                className="py-3 px-2 rounded-lg hover:bg-gray-50"
+                className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
               >
                 {t("nav.recommendations")}
               </Link>
@@ -150,7 +151,7 @@ const Navbar = () => {
               <Link
                 to="/favorites"
                 onClick={closeMenu}
-                className="py-3 px-2 rounded-lg hover:bg-gray-50"
+                className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
               >
                 {t("nav.favorites")}
               </Link>
@@ -162,7 +163,7 @@ const Navbar = () => {
               <Link
                 to="/login"
                 onClick={closeMenu}
-                className="text-center text-blue-600 border border-blue-600 px-4 py-2.5 rounded-lg"
+                className="text-center text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-400 px-4 py-2.5 rounded-lg"
               >
                 {t("nav.login")}
               </Link>
@@ -176,7 +177,7 @@ const Navbar = () => {
               </Link>
             </div>
           ) : (
-            <div className="flex items-center justify-between gap-3 mt-3 pt-3 border-t border-gray-100">
+            <div className="flex items-center justify-between gap-3 mt-3 pt-3 border-t border-gray-100 dark:border-gray-700">
               <span className="font-semibold truncate">{user.name}</span>
 
               <button
@@ -188,10 +189,10 @@ const Navbar = () => {
             </div>
           )}
 
-          <div className="mt-3 pt-3 border-t border-gray-100">
+          <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 space-y-2">
+            <ThemeSwitcher variant="mobile" />
             <LanguageSwitcher variant="mobile" />
           </div>
-          <Link to="/feedback">{t("nav.feedback")}</Link>
         </div>
       </div>
     </nav>

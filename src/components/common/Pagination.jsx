@@ -39,19 +39,19 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
         <button
           disabled={page === 1}
           onClick={() => onPageChange(page - 1)}
-          className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-medium disabled:bg-gray-300 shrink-0"
+          className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-blue-600 dark:bg-blue-500 text-white text-sm font-medium disabled:bg-gray-300 dark:disabled:bg-gray-700 shrink-0"
         >
           <FaChevronLeft size={12} />
         </button>
 
-        <span className="text-sm font-medium text-gray-600 shrink-0">
+        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 shrink-0">
           {page} / {totalPages}
         </span>
 
         <button
           disabled={page === totalPages}
           onClick={() => onPageChange(page + 1)}
-          className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-medium disabled:bg-gray-300 shrink-0"
+          className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-blue-600 dark:bg-blue-500 text-white text-sm font-medium disabled:bg-gray-300 dark:disabled:bg-gray-700 shrink-0"
         >
           <FaChevronRight size={12} />
         </button>
@@ -62,7 +62,7 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
         <button
           disabled={page === 1}
           onClick={() => onPageChange(page - 1)}
-          className="px-4 py-2 rounded-lg bg-blue-600 text-white disabled:bg-gray-300 text-sm md:text-base"
+          className="px-4 py-2 rounded-lg bg-blue-600 dark:bg-blue-500 text-white disabled:bg-gray-300 dark:disabled:bg-gray-700 text-sm md:text-base"
         >
           {t("common.previous")}
         </button>
@@ -71,7 +71,7 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
           typeof p === "string" ? (
             <span
               key={p}
-              className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center text-gray-400"
+              className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center text-gray-400 dark:text-gray-500"
             >
               …
             </span>
@@ -80,7 +80,9 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
               key={p}
               onClick={() => onPageChange(p)}
               className={`w-9 h-9 md:w-10 md:h-10 rounded-lg text-sm md:text-base ${
-                page === p ? "bg-blue-600 text-white" : "bg-gray-200"
+                page === p
+                  ? "bg-blue-600 dark:bg-blue-500 text-white"
+                  : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200"
               }`}
             >
               {p}
@@ -91,7 +93,7 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
         <button
           disabled={page === totalPages}
           onClick={() => onPageChange(page + 1)}
-          className="px-4 py-2 rounded-lg bg-blue-600 text-white disabled:bg-gray-300 text-sm md:text-base"
+          className="px-4 py-2 rounded-lg bg-blue-600 dark:bg-blue-500 text-white disabled:bg-gray-300 dark:disabled:bg-gray-700 text-sm md:text-base"
         >
           {t("common.next")}
         </button>

@@ -93,7 +93,9 @@ const Schemes = () => {
         />
 
         <div className="flex flex-wrap gap-3 justify-between items-center mt-8 mb-5">
-          <h2 className="text-2xl font-bold">{t("schemes.available")}</h2>
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+            {t("schemes.available")}
+          </h2>
 
           <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
             {t("schemes.count", { count: schemes.length })}

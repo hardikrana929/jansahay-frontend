@@ -80,8 +80,6 @@ const Dashboard = () => {
     }
   };
 
-
-
   return (
     <MainLayout>
       <PageHeader
@@ -100,35 +98,35 @@ const Dashboard = () => {
             profile ? t("dashboard.statCompleted") : t("dashboard.statPending")
           }
           icon={<FaUser size={24} />}
-          color="bg-blue-100 text-blue-600"
+          color="bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400"
         />
 
         <StatCard
           title={t("dashboard.statSchemes")}
           value={schemes.length}
           icon={<FaFileAlt size={24} />}
-          color="bg-green-100 text-green-600"
+          color="bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400"
         />
 
         <StatCard
           title={t("dashboard.statRecommendations")}
           value={recommendations.length}
           icon={<FaMagic size={24} />}
-          color="bg-purple-100 text-purple-600"
+          color="bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400"
         />
 
         <StatCard
           title={t("dashboard.statFavorites")}
           value={favorites.length}
           icon={<FaHeart size={24} />}
-          color="bg-red-100 text-red-600"
+          color="bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400"
         />
       </div>
 
       {/* Quick Actions */}
 
       <div className="mt-12">
-        <h2 className="text-2xl font-bold mb-6">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
           {t("dashboard.quickActions")}
         </h2>
 
@@ -166,7 +164,7 @@ const Dashboard = () => {
       {/* Recommended Schemes */}
 
       <div className="mt-14">
-        <h2 className="text-2xl font-bold mb-6">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
           {t("dashboard.recommendedSchemes")}
         </h2>
 
@@ -178,7 +176,9 @@ const Dashboard = () => {
                 <RecommendationCard key={scheme._id} scheme={scheme} />
               ))
           ) : (
-            <p>{t("dashboard.noRecommendations")}</p>
+            <p className="text-gray-600 dark:text-gray-300">
+              {t("dashboard.noRecommendations")}
+            </p>
           )}
         </div>
       </div>
@@ -186,7 +186,7 @@ const Dashboard = () => {
       {/* Latest Schemes */}
 
       <div className="mt-14">
-        <h2 className="text-2xl font-bold mb-6">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
           {t("dashboard.latestSchemes")}
         </h2>
 

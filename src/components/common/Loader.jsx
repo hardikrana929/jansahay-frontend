@@ -12,15 +12,19 @@ const Loader = ({ text, fullScreen = true }) => {
       exit={{ opacity: 0 }}
       className={`${
         fullScreen ? "fixed inset-0" : "w-full h-full min-h-[300px]"
-      } flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm z-50`}
+      } flex flex-col items-center justify-center bg-white/80 dark:bg-gray-950/80 backdrop-blur-sm z-50`}
     >
-      <h1 className="text-4xl font-bold text-blue-600">{t("nav.name")}</h1>
+      <h1 className="text-4xl font-bold text-blue-600 dark:text-blue-400">
+        {t("nav.name")}
+      </h1>
 
-      <p className="text-gray-500 mt-2 mb-8">{t("loader.subtitle")}</p>
+      <p className="text-gray-500 dark:text-gray-400 mt-2 mb-8">
+        {t("loader.subtitle")}
+      </p>
 
       <BeatLoader color="#2563EB" size={18} />
 
-      <p className="mt-8 text-lg font-medium text-gray-700">
+      <p className="mt-8 text-lg font-medium text-gray-700 dark:text-gray-300">
         {text || t("loader.default")}
       </p>
     </motion.div>

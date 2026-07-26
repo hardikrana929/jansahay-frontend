@@ -19,7 +19,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
       {/* Header */}
 
       <div className="bg-gradient-to-r from-blue-600 to-green-500 text-white p-5">
@@ -49,11 +49,11 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
         {/* Description */}
 
         <div>
-          <h3 className="font-semibold mb-2">
+          <h3 className="font-semibold mb-2 text-gray-800 dark:text-gray-100">
             {t("schemeDetails.basicInfo")}
           </h3>
 
-          <p className="text-gray-600 text-sm leading-6">
+          <p className="text-gray-600 dark:text-gray-300 text-sm leading-6">
             {scheme.description}
           </p>
         </div>
@@ -61,9 +61,13 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
         {/* Benefits */}
 
         <div>
-          <h3 className="font-semibold mb-2">{t("schemeDetails.benefits")}</h3>
+          <h3 className="font-semibold mb-2 text-gray-800 dark:text-gray-100">
+            {t("schemeDetails.benefits")}
+          </h3>
 
-          <p className="text-gray-600 text-sm">{scheme.benefits}</p>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">
+            {scheme.benefits}
+          </p>
         </div>
 
         {/* Badges */}
@@ -78,9 +82,9 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
 
         {/* Eligibility */}
 
-        <div className="space-y-3">
+        <div className="space-y-3 text-gray-700 dark:text-gray-300">
           <div className="flex items-center gap-2">
-            <FaUserGraduate className="text-blue-600" />
+            <FaUserGraduate className="text-blue-600 dark:text-blue-400" />
 
             <span className="text-sm">
               {t("schemeDetails.occupation")}:{" "}
@@ -91,7 +95,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <FaMoneyBillWave className="text-green-600" />
+            <FaMoneyBillWave className="text-green-600 dark:text-green-400" />
 
             <span className="text-sm">
               {t("schemes.incomeLimit")}: ₹{scheme.incomeLimit.toLocaleString()}
@@ -99,7 +103,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <FaCalendarAlt className="text-orange-500" />
+            <FaCalendarAlt className="text-orange-500 dark:text-orange-400" />
 
             <span className="text-sm">
               {t("schemes.ageRange")}: {scheme.minAge} - {scheme.maxAge}{" "}
@@ -108,7 +112,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <FaMapMarkerAlt className="text-red-500" />
+            <FaMapMarkerAlt className="text-red-500 dark:text-red-400" />
 
             <span className="text-sm">
               {t("profile.state")}: {scheme.state}
@@ -116,7 +120,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <FaUniversity className="text-indigo-500" />
+            <FaUniversity className="text-indigo-500 dark:text-indigo-400" />
 
             <span className="text-sm">
               {t("schemeDetails.category")}:{" "}
@@ -128,7 +132,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
 
           {scheme.disabilityRequired && (
             <div className="flex items-center gap-2">
-              <FaWheelchair className="text-purple-600" />
+              <FaWheelchair className="text-purple-600 dark:text-purple-400" />
 
               <span className="text-sm">
                 {t("schemeDetails.disabilityCertRequired")}
@@ -141,12 +145,12 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
 
         {scheme.documentsRequired.length > 0 && (
           <div>
-            <h3 className="font-semibold mb-2 flex items-center gap-2">
+            <h3 className="font-semibold mb-2 flex items-center gap-2 text-gray-800 dark:text-gray-100">
               <FaFileAlt />
               {t("schemeDetails.documentsRequired")}
             </h3>
 
-            <ul className="list-disc ml-6 text-sm text-gray-600 space-y-1">
+            <ul className="list-disc ml-6 text-sm text-gray-600 dark:text-gray-300 space-y-1">
               {scheme.documentsRequired.map((doc, index) => (
                 <li key={index}>{doc}</li>
               ))}
@@ -156,10 +160,10 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
 
         {/* Footer */}
 
-        <div className="pt-4 border-t flex justify-between items-center">
+        <div className="pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
           <div>
             {scheme.applicationDeadline && (
-              <p className="text-xs text-red-500">
+              <p className="text-xs text-red-500 dark:text-red-400">
                 {t("schemeDetails.applicationDeadline")}:{" "}
                 {new Date(scheme.applicationDeadline).toLocaleDateString()}
               </p>
@@ -170,7 +174,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
             href={scheme.officialLink}
             target="_blank"
             rel="noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition"
+            className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition"
           >
             {t("common.officialWebsite")}
             <FaExternalLinkAlt />

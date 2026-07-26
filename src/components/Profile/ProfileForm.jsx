@@ -23,11 +23,12 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl shadow-md p-5 sm:p-8 space-y-8 border border-gray-100"
+      className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5 sm:p-8 space-y-8 border border-gray-100 dark:border-gray-700 transition-colors"
     >
       <div>
-        <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-          <FaUser className="text-blue-600" /> {t("profile.personalDetails")}
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
+          <FaUser className="text-blue-600 dark:text-blue-400" />{" "}
+          {t("profile.personalDetails")}
         </h3>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -86,8 +87,8 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-          <FaBriefcase className="text-blue-600" />{" "}
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
+          <FaBriefcase className="text-blue-600 dark:text-blue-400" />{" "}
           {t("profile.occupationIncome")}
         </h3>
 
@@ -143,50 +144,54 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
       </div>
 
       <div>
-        <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-          <FaWheelchair className="text-blue-600" />{" "}
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
+          <FaWheelchair className="text-blue-600 dark:text-blue-400" />{" "}
           {t("profile.additionalDetails")}
         </h3>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-          <label className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 cursor-pointer hover:border-blue-400 transition">
+          <label className="flex items-center gap-2 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 cursor-pointer hover:border-blue-400 transition text-gray-700 dark:text-gray-200">
             <input
               type="checkbox"
               name="farmer"
               checked={formData.farmer}
               onChange={handleChange}
             />
-            <FaTractor className="text-gray-500" /> {t("profile.isFarmer")}
+            <FaTractor className="text-gray-500 dark:text-gray-400" />{" "}
+            {t("profile.isFarmer")}
           </label>
 
-          <label className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 cursor-pointer hover:border-blue-400 transition">
+          <label className="flex items-center gap-2 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 cursor-pointer hover:border-blue-400 transition text-gray-700 dark:text-gray-200">
             <input
               type="checkbox"
               name="landOwnership"
               checked={formData.landOwnership}
               onChange={handleChange}
             />
-            <FaMapMarkerAlt className="text-gray-500" /> {t("profile.ownsLand")}
+            <FaMapMarkerAlt className="text-gray-500 dark:text-gray-400" />{" "}
+            {t("profile.ownsLand")}
           </label>
 
-          <label className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 cursor-pointer hover:border-blue-400 transition">
+          <label className="flex items-center gap-2 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 cursor-pointer hover:border-blue-400 transition text-gray-700 dark:text-gray-200">
             <input
               type="checkbox"
               name="businessOwner"
               checked={formData.businessOwner}
               onChange={handleChange}
             />
-            <FaStore className="text-gray-500" /> {t("profile.businessOwner")}
+            <FaStore className="text-gray-500 dark:text-gray-400" />{" "}
+            {t("profile.businessOwner")}
           </label>
 
-          <label className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 cursor-pointer hover:border-blue-400 transition">
+          <label className="flex items-center gap-2 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 cursor-pointer hover:border-blue-400 transition text-gray-700 dark:text-gray-200">
             <input
               type="checkbox"
               name="disability"
               checked={formData.disability}
               onChange={handleChange}
             />
-            <FaWheelchair className="text-gray-500" /> {t("profile.disability")}
+            <FaWheelchair className="text-gray-500 dark:text-gray-400" />{" "}
+            {t("profile.disability")}
           </label>
         </div>
       </div>
@@ -194,7 +199,7 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3.5 rounded-xl font-semibold transition shadow-md"
+        className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-500 dark:to-blue-600 text-white py-3.5 rounded-xl font-semibold transition shadow-md"
       >
         {loading ? t("profile.saving") : t("profile.saveProfile")}
       </button>

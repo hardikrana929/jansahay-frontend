@@ -77,16 +77,16 @@ const Favorites = () => {
 
       {/* Search */}
 
-      <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-5 mb-8">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 p-5 mb-8 transition-colors">
         <div className="flex items-center gap-3">
-          <FaSearch className="text-blue-600" />
+          <FaSearch className="text-blue-600 dark:text-blue-400" />
 
           <input
             type="text"
             placeholder={t("favorites.searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full outline-none text-gray-700"
+            className="w-full outline-none text-gray-700 dark:text-gray-100 bg-transparent placeholder:text-gray-400 dark:placeholder:text-gray-500"
           />
         </div>
       </div>
@@ -94,7 +94,9 @@ const Favorites = () => {
       {/* Count */}
 
       <div className="flex flex-wrap gap-3 justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">{t("favorites.saved")}</h2>
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+          {t("favorites.saved")}
+        </h2>
 
         <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
           {t("favorites.count", { count: filteredFavorites.length })}

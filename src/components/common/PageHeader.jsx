@@ -1,9 +1,11 @@
 const PageHeader = ({ title, subtitle }) => {
   return (
     <div className="mb-8">
-      <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">{title}</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-gray-100">
+        {title}
+      </h1>
 
-      <p className="text-gray-500 mt-2">{subtitle}</p>
+      <p className="text-gray-500 dark:text-gray-400 mt-2">{subtitle}</p>
     </div>
   );
 };

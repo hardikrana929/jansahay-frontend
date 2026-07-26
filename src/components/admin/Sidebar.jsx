@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import LanguageSwitcher from "../common/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import {
   FaTachometerAlt,
@@ -87,6 +88,12 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
             <p className="text-sm text-blue-200 mt-1">{t("admin.panel")}</p>
           </div>
+          {/* Multilanguage */}
+
+          <div className="pl-2 border-gray-200 dark:border-gray-700 flex items-start flex-col gap-3">
+            <ThemeSwitcher />
+            <LanguageSwitcher />
+          </div>
 
           <button className="lg:hidden" onClick={() => setIsOpen(false)}>
             <FaTimes className="text-2xl" />
@@ -122,7 +129,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <div className="absolute bottom-0 left-0 w-full p-5 border-t border-blue-600">
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-3 bg-red-500 hover:bg-red-600 py-3 rounded-xl transition"
+            className="w-full flex items-center justify-center cursor-pointer gap-3 bg-red-500 hover:bg-red-600 py-3 rounded-xl transition"
           >
             <FaSignOutAlt />
             {t("admin.logout")}

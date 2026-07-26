@@ -6,13 +6,16 @@ import App from "./App";
 import "./index.css";
 import "./i18n";
 
+import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <AuthProvider>
-      <Toaster position="top-right" />
-      <App />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <Toaster position="top-right" />
+        <App />
+      </AuthProvider>
+    </ThemeProvider>
   </BrowserRouter>,
 );

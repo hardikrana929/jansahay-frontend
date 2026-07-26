@@ -360,5 +360,11 @@
     "delete": "Delete",
     "deleteConfirm": "Are you sure you want to delete this feedback?",
     "deleted": "Feedback deleted"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "choose": "Choose theme"
   }
 }

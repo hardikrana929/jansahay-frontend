@@ -3,19 +3,24 @@ import { FaCircleExclamation } from "react-icons/fa6";
 const Input = ({ label, icon: Icon, error, ...props }) => {
   return (
     <div className="space-y-2">
-      <label className="font-medium text-gray-700">{label}</label>
+      <label className="font-medium text-gray-700 dark:text-gray-200">
+        {label}
+      </label>
 
       <div
-        className={`flex items-center rounded-xl border bg-white px-4 py-3 transition
+        className={`flex items-center rounded-xl border bg-white dark:bg-gray-800 px-4 py-3 transition
         ${
           error
             ? "border-red-500"
-            : "border-gray-300 focus-within:border-blue-500"
+            : "border-gray-300 dark:border-gray-600 focus-within:border-blue-500"
         }`}
       >
         {Icon && <Icon className="mr-3 text-gray-400" size={18} />}
 
-        <input className="flex-1 outline-none bg-transparent" {...props} />
+        <input
+          className="flex-1 outline-none bg-transparent text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+          {...props}
+        />
       </div>
 
       {error && (
