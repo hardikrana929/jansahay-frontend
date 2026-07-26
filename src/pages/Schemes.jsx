@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import useDebounce from "../hooks/useDebounce";
+import useDebounce from "../hooks/Usedebounce";
 import MainLayout from "../layouts/MainLayout";
 import Loader from "../components/common/Loader";
 import PageHeader from "../components/common/PageHeader";
