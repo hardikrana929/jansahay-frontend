@@ -56,7 +56,7 @@ const ThemeSwitcher = ({ variant = "desktop" }) => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="flex items-center gap-1.5 text-white  dark:text-black transition text-sm font-medium"
+        className="flex items-center gap-1.5 text-gray-300  dark:text-white transition text-sm font-medium"
         aria-label={t("theme.choose")}
       >
         <CurrentIcon size={18} />

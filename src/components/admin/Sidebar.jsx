@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import LanguageSwitcher from "../common/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
+import ThemeSwitcher from "../common/ThemeSwitcher";
 import {
   FaTachometerAlt,
   FaClipboardList,

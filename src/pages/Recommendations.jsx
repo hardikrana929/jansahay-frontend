@@ -5,7 +5,7 @@ import Pagination from "../components/common/Pagination";
 import MainLayout from "../layouts/MainLayout";
 import Loader from "../components/common/Loader";
 import PageHeader from "../components/common/PageHeader";
-
+import useDebounce from "../hooks/useDebounce";
 import RecommendationCard from "../components/recommendation/RecommendationCard";
 import RecommendationFilter from "../components/recommendation/RecommendationFilter";
 import EmptyRecommendation from "../components/recommendation/EmptyRecommendation";
@@ -16,7 +16,6 @@ import {
   addFavorite,
   removeFavorite,
 } from "../services/recommendationService";
-import useDebounce from "../hooks/useDebounce";
 
 const Recommendation = () => {
   const { t } = useTranslation();

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-
+import useDebounce from "../hooks/useDebounce";
 import MainLayout from "../layouts/MainLayout";
 import Loader from "../components/common/Loader";
 import PageHeader from "../components/common/PageHeader";
@@ -12,7 +12,6 @@ import SchemeFilter from "../components/schemes/SchemeFilter";
 import EmptyScheme from "../components/schemes/EmptyScheme";
 
 import { getSchemes } from "../services/schemeService";
-import useDebounce from "../hooks/useDebounce";
 
 const Schemes = () => {
   const { t } = useTranslation();
