@@ -31,7 +31,7 @@ const RecentSchemeCard = ({ scheme }) => {
         to={`/schemes/${scheme._id}`}
         className="mt-5 inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold hover:underline"
       >
-        {t("dashboard.viewScheme")}
+        {t("dashboard.viewSchemes")}
         <FaArrowRight />
       </Link>
     </div>
