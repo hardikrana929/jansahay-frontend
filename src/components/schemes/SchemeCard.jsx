@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import {
   FaArrowRight,
@@ -10,6 +11,8 @@ import {
 } from "react-icons/fa";
 
 const SchemeCard = ({ scheme }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
       {/* Header */}
@@ -50,7 +53,7 @@ const SchemeCard = ({ scheme }) => {
             <FaMoneyBillWave className="text-green-600" />
 
             <span>
-              Income Limit :
+              {t("schemes.incomeLimit")} :
               <strong> ₹{scheme.incomeLimit.toLocaleString()}</strong>
             </span>
           </div>
@@ -59,7 +62,7 @@ const SchemeCard = ({ scheme }) => {
             <FaCalendarAlt className="text-orange-500" />
 
             <span>
-              Age :
+              {t("schemes.ageRange")} :
               <strong>
                 {" "}
                 {scheme.minAge} - {scheme.maxAge}
@@ -76,7 +79,9 @@ const SchemeCard = ({ scheme }) => {
           <div className="flex items-center gap-2">
             <FaUniversity className="text-indigo-500" />
 
-            <span>{scheme.government} Government</span>
+            <span>
+              {scheme.government} {t("schemes.governmentLabel")}
+            </span>
           </div>
         </div>
       </div>
@@ -88,7 +93,7 @@ const SchemeCard = ({ scheme }) => {
           to={`/schemes/${scheme._id}`}
           className="text-blue-600 font-semibold flex items-center gap-2 hover:underline"
         >
-          View Details
+          {t("common.viewDetails")}
           <FaArrowRight />
         </Link>
 
@@ -98,7 +103,7 @@ const SchemeCard = ({ scheme }) => {
           rel="noreferrer"
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition"
         >
-          Apply
+          {t("common.apply")}
           <FaExternalLinkAlt />
         </a>
       </div>

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import MainLayout from "../layouts/MainLayout";
 import Loader from "../components/common/Loader";
@@ -13,6 +14,7 @@ import { FaSearch } from "react-icons/fa";
 import { getFavorites, removeFavorite } from "../services/favoriteService";
 
 const Favorites = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
 
   const [favorites, setFavorites] = useState([]);
@@ -29,9 +31,7 @@ const Favorites = () => {
 
       setFavorites(res.favorite || []);
     } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Unable to load favorite schemes.",
-      );
+      toast.error(error.response?.data?.message || t("favorites.unableToLoad"));
     } finally {
       setLoading(false);
     }
@@ -45,10 +45,10 @@ const Favorites = () => {
         prev.filter((item) => item.scheme._id !== schemeId),
       );
 
-      toast.success("Removed from favorites");
+      toast.success(t("favorites.removed"));
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Unable to remove favorite.",
+        error.response?.data?.message || t("favorites.unableToRemove"),
       );
     }
   };
@@ -65,14 +65,14 @@ const Favorites = () => {
   }, [favorites, search]);
 
   if (loading) {
-    return <Loader text="Loading Favorite Schemes..." />;
+    return <Loader text={t("common.loadingFavorites")} />;
   }
 
   return (
     <MainLayout>
       <PageHeader
-        title="My Favorite Schemes"
-        subtitle="Access your saved government schemes quickly."
+        title={t("favorites.title")}
+        subtitle={t("favorites.subtitle")}
       />
 
       {/* Search */}
@@ -83,7 +83,7 @@ const Favorites = () => {
 
           <input
             type="text"
-            placeholder="Search favorite schemes..."
+            placeholder={t("favorites.searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full outline-none text-gray-700"
@@ -94,10 +94,10 @@ const Favorites = () => {
       {/* Count */}
 
       <div className="flex flex-wrap gap-3 justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Saved Schemes</h2>
+        <h2 className="text-2xl font-bold">{t("favorites.saved")}</h2>
 
         <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
-          {filteredFavorites.length} Saved
+          {t("favorites.count", { count: filteredFavorites.length })}
         </span>
       </div>
 

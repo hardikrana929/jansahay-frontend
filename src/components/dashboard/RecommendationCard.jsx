@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaExternalLinkAlt, FaHeart, FaMapMarkerAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const RecommendationCard = ({ scheme }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300 p-6">
       <div className="flex justify-between items-start">
@@ -19,7 +22,7 @@ const RecommendationCard = ({ scheme }) => {
 
         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm flex items-center gap-1">
           <FaMapMarkerAlt />
-          {scheme.state || "India"}
+          {scheme.state || t("common.india")}
         </span>
       </div>
 
@@ -28,7 +31,7 @@ const RecommendationCard = ({ scheme }) => {
           to={`/schemes/${scheme._id}`}
           className="text-blue-600 font-semibold hover:underline"
         >
-          View Details
+          {t("common.viewDetails")}
         </Link>
 
         {scheme.officialLink && (

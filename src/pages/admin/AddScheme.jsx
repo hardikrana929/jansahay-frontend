@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import AdminLayout from "../../layouts/AdminLayout";
 import Input from "../../components/common/Input";
@@ -32,6 +33,7 @@ const OCCUPATIONS = [
 ];
 
 const AddScheme = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -85,7 +87,7 @@ const AddScheme = () => {
       !form.officialLink ||
       !form.applicationDeadline
     ) {
-      return toast.error("Please fill all required fields");
+      return toast.error(t("admin.fillAllRequired"));
     }
 
     try {
@@ -102,7 +104,7 @@ const AddScheme = () => {
       toast.success(res.message);
       navigate("/admin/manage-schemes");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to create scheme");
+      toast.error(error.response?.data?.message || t("admin.failedToCreate"));
     } finally {
       setLoading(false);
     }
@@ -110,21 +112,21 @@ const AddScheme = () => {
 
   return (
     <AdminLayout>
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Add New Scheme</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">{t("admin.addSchemeTitle")}</h1>
 
       <form
         onSubmit={handleSubmit}
         className="bg-white rounded-2xl shadow-md p-5 sm:p-8 space-y-5 border border-gray-100"
       >
         <Input
-          label="Title"
+          label={t("admin.formTitle")}
           name="title"
           value={form.title}
           onChange={handleChange}
         />
 
         <div className="space-y-2">
-          <label className="font-medium text-gray-700">Description</label>
+          <label className="font-medium text-gray-700">{t("schemeDetails.description")}</label>
           <textarea
             name="description"
             rows={4}
@@ -136,15 +138,15 @@ const AddScheme = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <SelectInput
-            label="Scheme Type"
+            label={t("admin.formSchemeType")}
             name="schemeType"
             value={form.schemeType}
             onChange={handleChange}
-            options={SCHEME_TYPES.map((t) => ({ label: t, value: t }))}
+            options={SCHEME_TYPES.map((type) => ({ label: type, value: type }))}
           />
 
           <SelectInput
-            label="Government"
+            label={t("schemes.governmentLabel")}
             name="government"
             value={form.government}
             onChange={handleChange}
@@ -153,7 +155,7 @@ const AddScheme = () => {
         </div>
 
         <Input
-          label="State (or 'All')"
+          label={t("admin.formStateOrAll")}
           name="state"
           value={form.state}
           onChange={handleChange}
@@ -161,21 +163,21 @@ const AddScheme = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <Input
-            label="Income Limit"
+            label={t("schemes.incomeLimit")}
             name="incomeLimit"
             type="number"
             value={form.incomeLimit}
             onChange={handleChange}
           />
           <Input
-            label="Min Age"
+            label={t("admin.formMinAge")}
             name="minAge"
             type="number"
             value={form.minAge}
             onChange={handleChange}
           />
           <Input
-            label="Max Age"
+            label={t("admin.formMaxAge")}
             name="maxAge"
             type="number"
             value={form.maxAge}
@@ -185,7 +187,7 @@ const AddScheme = () => {
 
         <div>
           <label className="font-medium text-gray-700 block mb-2">
-            Eligible Categories
+            {t("admin.formEligibleCategories")}
           </label>
           <div className="flex flex-wrap gap-3">
             {CATEGORIES.map((c) => (
@@ -206,7 +208,7 @@ const AddScheme = () => {
 
         <div>
           <label className="font-medium text-gray-700 block mb-2">
-            Eligible Occupations
+            {t("admin.formEligibleOccupations")}
           </label>
           <div className="flex flex-wrap gap-3">
             {OCCUPATIONS.map((o) => (
@@ -232,11 +234,11 @@ const AddScheme = () => {
             checked={form.disabilityRequired}
             onChange={handleChange}
           />
-          Disability required
+          {t("admin.formDisabilityRequired")}
         </label>
 
         <div className="space-y-2">
-          <label className="font-medium text-gray-700">Benefits</label>
+          <label className="font-medium text-gray-700">{t("schemeDetails.benefits")}</label>
           <textarea
             name="benefits"
             rows={3}
@@ -247,28 +249,28 @@ const AddScheme = () => {
         </div>
 
         <Input
-          label="Documents Required (comma separated)"
+          label={t("admin.formDocumentsRequired")}
           name="documentsRequired"
           value={form.documentsRequired}
           onChange={handleChange}
         />
 
         <Input
-          label="Official Link"
+          label={t("admin.formOfficialLink")}
           name="officialLink"
           value={form.officialLink}
           onChange={handleChange}
         />
 
         <Input
-          label="Application Deadline"
+          label={t("schemeDetails.applicationDeadline")}
           name="applicationDeadline"
           type="date"
           value={form.applicationDeadline}
           onChange={handleChange}
         />
 
-        <Button text="Create Scheme" loading={loading} />
+        <Button text={t("admin.formCreateScheme")} loading={loading} />
       </form>
     </AdminLayout>
   );

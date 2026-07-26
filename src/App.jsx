@@ -12,6 +12,8 @@ import Recommendations from "./pages/Recommendations";
 import Favorites from "./pages/Favorites";
 import SchemeDetails from "./pages/SchemeDetails";
 import NotFound from "./pages/NotFound";
+import Feedback from "./pages/Feedback";
+import ManageFeedback from "./pages/admin/ManageFeedback";
 
 import AdminDashboard from "./pages/admin/Dashboard";
 import AddScheme from "./pages/admin/AddScheme";
@@ -68,6 +70,15 @@ function App() {
       />
 
       <Route
+        path="/feedback"
+        element={
+          <ProtectedRoute>
+            <Feedback />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
         path="/recommendations"
         element={
           <ProtectedRoute>
@@ -118,6 +129,14 @@ function App() {
         element={
           <AdminRoute>
             <ManageSchemes />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/manage-feedback"
+        element={
+          <AdminRoute>
+            <ManageFeedback />
           </AdminRoute>
         }
       />

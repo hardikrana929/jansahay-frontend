@@ -1,6 +1,8 @@
 import { FaHeart, FaExternalLinkAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const FavoriteCard = ({ favorite, onRemove }) => {
+  const { t } = useTranslation();
   const scheme = favorite.scheme;
 
   if (!scheme) return null;
@@ -45,7 +47,7 @@ const FavoriteCard = ({ favorite, onRemove }) => {
           rel="noopener noreferrer"
           className="mt-6 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
         >
-          Official Website
+          {t("common.officialWebsite")}
           <FaExternalLinkAlt size={13} />
         </a>
       </div>

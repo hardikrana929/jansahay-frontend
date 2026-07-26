@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   FaExclamationTriangle,
   FaHome,
@@ -8,6 +9,8 @@ import {
 } from "react-icons/fa";
 
 const NotFound = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center px-6">
       <div className="max-w-3xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
@@ -17,13 +20,16 @@ const NotFound = () => {
             <FaHandsHelping className="text-5xl text-blue-700" />
           </div>
 
-          <h1 className="text-7xl font-extrabold mt-6">404</h1>
+          <h1 className="text-7xl font-extrabold mt-6">
+            {t("notFound.title")}
+          </h1>
 
-          <p className="text-2xl font-semibold mt-2">Page Not Found</p>
+          <p className="text-2xl font-semibold mt-2">
+            {t("notFound.subtitle")}
+          </p>
 
           <p className="text-blue-100 mt-3 max-w-xl mx-auto">
-            The page you're looking for doesn't exist or may have been moved.
-            Let's help you get back to finding the right government schemes.
+            {t("notFound.description")}
           </p>
         </div>
 
@@ -38,28 +44,34 @@ const NotFound = () => {
           <div className="grid md:grid-cols-3 gap-5 mb-10">
             <div className="bg-blue-50 rounded-xl p-5 text-center border">
               <FaSearch className="mx-auto text-blue-600 text-3xl mb-3" />
-              <h3 className="font-bold text-gray-800">Browse Schemes</h3>
+              <h3 className="font-bold text-gray-800">
+                {t("notFound.browseTitle")}
+              </h3>
 
               <p className="text-gray-500 text-sm mt-2">
-                Explore Central and State Government schemes.
+                {t("notFound.browseDesc")}
               </p>
             </div>
 
             <div className="bg-green-50 rounded-xl p-5 text-center border">
               <FaHandsHelping className="mx-auto text-green-600 text-3xl mb-3" />
-              <h3 className="font-bold text-gray-800">Smart Recommendations</h3>
+              <h3 className="font-bold text-gray-800">
+                {t("notFound.recommendTitle")}
+              </h3>
 
               <p className="text-gray-500 text-sm mt-2">
-                Discover schemes based on your eligibility profile.
+                {t("notFound.recommendDesc")}
               </p>
             </div>
 
             <div className="bg-purple-50 rounded-xl p-5 text-center border">
               <FaHome className="mx-auto text-purple-600 text-3xl mb-3" />
-              <h3 className="font-bold text-gray-800">Return Home</h3>
+              <h3 className="font-bold text-gray-800">
+                {t("notFound.homeTitle")}
+              </h3>
 
               <p className="text-gray-500 text-sm mt-2">
-                Continue using JanSahay without interruption.
+                {t("notFound.homeDesc")}
               </p>
             </div>
           </div>
@@ -72,7 +84,7 @@ const NotFound = () => {
               className="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition duration-300"
             >
               <FaHome />
-              Go to Dashboard
+              {t("notFound.goToDashboard")}
             </Link>
 
             <Link
@@ -80,7 +92,7 @@ const NotFound = () => {
               className="flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition duration-300"
             >
               <FaSearch />
-              Browse Schemes
+              {t("notFound.browseSchemesBtn")}
             </Link>
 
             <button
@@ -88,13 +100,12 @@ const NotFound = () => {
               className="flex items-center justify-center gap-3 border border-gray-300 hover:bg-gray-100 text-gray-700 px-6 py-3 rounded-xl font-semibold transition duration-300"
             >
               <FaArrowLeft />
-              Go Back
+              {t("notFound.goBack")}
             </button>
           </div>
 
           <div className="mt-10 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} JanSahay • Smart Government Scheme
-            Recommendation System
+            © {new Date().getFullYear()} JanSahay • {t("loader.subtitle")}
           </div>
         </div>
       </div>

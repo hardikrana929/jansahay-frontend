@@ -1,6 +1,9 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Pagination = ({ page, totalPages, onPageChange }) => {
+  const { t } = useTranslation();
+
   if (totalPages <= 1) return null;
 
   // Builds a windowed list of page numbers with "..." gaps,
@@ -61,7 +64,7 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
           onClick={() => onPageChange(page - 1)}
           className="px-4 py-2 rounded-lg bg-blue-600 text-white disabled:bg-gray-300 text-sm md:text-base"
         >
-          Privous
+          {t("common.previous")}
         </button>
 
         {pages.map((p) =>
@@ -90,7 +93,7 @@ const Pagination = ({ page, totalPages, onPageChange }) => {
           onClick={() => onPageChange(page + 1)}
           className="px-4 py-2 rounded-lg bg-blue-600 text-white disabled:bg-gray-300 text-sm md:text-base"
         >
-          Next
+          {t("common.next")}
         </button>
       </div>
     </div>

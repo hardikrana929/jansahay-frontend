@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import {
   FaEnvelope,
@@ -26,6 +27,7 @@ const RESEND_SECONDS = 60;
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // "email" -> "otp" -> "password" -> "success"
   const [step, setStep] = useState("email");
@@ -60,17 +62,17 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     if (!email) {
-      return toast.error("Please enter your email");
+      return toast.error(t("auth.forgotPassword.enterEmail"));
     }
 
     try {
       setLoading(true);
       const data = await forgotPassword(email);
-      toast.success(data.message || "OTP sent to your email");
+      toast.success(data.message);
       setStep("otp");
       setResendTimer(RESEND_SECONDS);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Unable to send OTP");
+      toast.error(error.response?.data?.message || t("common.somethingWrong"));
     } finally {
       setLoading(false);
     }
@@ -81,17 +83,17 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     if (!otp || otp.length !== 6) {
-      return toast.error("Please enter the 6 digit OTP");
+      return toast.error(t("auth.forgotPassword.enterValidOtp"));
     }
 
     try {
       setLoading(true);
       const data = await verifyResetOTP(email, otp);
-      toast.success(data.message || "OTP verified");
+      toast.success(data.message);
       setResetToken(data.resetToken);
       setStep("password");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Invalid or expired OTP");
+      toast.error(error.response?.data?.message || t("common.somethingWrong"));
     } finally {
       setLoading(false);
     }
@@ -104,11 +106,11 @@ const ForgotPassword = () => {
     try {
       setLoading(true);
       const data = await forgotPassword(email);
-      toast.success(data.message || "OTP resent to your email");
+      toast.success(data.message);
       setOtp("");
       setResendTimer(RESEND_SECONDS);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Unable to resend OTP");
+      toast.error(error.response?.data?.message || t("common.somethingWrong"));
     } finally {
       setLoading(false);
     }
@@ -119,22 +121,22 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     if (!newPassword || !confirmPassword) {
-      return toast.error("Please fill all fields");
+      return toast.error(t("auth.forgotPassword.fillAllFields"));
     }
     if (newPassword.length < 6) {
-      return toast.error("Password must be at least 6 characters");
+      return toast.error(t("auth.forgotPassword.minPassword"));
     }
     if (newPassword !== confirmPassword) {
-      return toast.error("Passwords do not match");
+      return toast.error(t("auth.forgotPassword.passwordMismatch"));
     }
 
     try {
       setLoading(true);
       const data = await resetPassword(resetToken, newPassword);
-      toast.success(data.message || "Password reset successfully");
+      toast.success(data.message);
       setStep("success");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Unable to reset password");
+      toast.error(error.response?.data?.message || t("common.somethingWrong"));
     } finally {
       setLoading(false);
     }
@@ -142,7 +144,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      {loading && <Loader text="Please wait..." />}
+      {loading && <Loader text={t("common.pleaseWait")} />}
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex justify-center items-center px-4 py-10">
         <div className="w-full max-w-md">
@@ -152,7 +154,7 @@ const ForgotPassword = () => {
             </div>
             <h1 className="text-2xl font-bold text-gray-800">JanSahay</h1>
             <p className="text-gray-500 text-sm mt-1">
-              Government schemes, made simple
+              {t("auth.brandTagline")}
             </p>
           </div>
 
@@ -181,24 +183,27 @@ const ForgotPassword = () => {
             {step === "email" && (
               <form onSubmit={handleSendOtp}>
                 <h2 className="text-2xl font-bold text-gray-800 mb-1">
-                  Forgot password?
+                  {t("auth.forgotPassword.title")}
                 </h2>
                 <p className="text-gray-500 mb-6">
-                  Enter your email and we'll send you a one-time code.
+                  {t("auth.forgotPassword.subtitle")}
                 </p>
 
                 <Input
-                  label="Email"
+                  label={t("auth.forgotPassword.emailLabel")}
                   type="email"
                   name="email"
-                  placeholder="you@example.com"
+                  placeholder={t("auth.forgotPassword.emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   icon={FaEnvelope}
                 />
 
                 <div className="mt-6">
-                  <Button text="Send OTP" loading={loading} />
+                  <Button
+                    text={t("auth.forgotPassword.sendOtp")}
+                    loading={loading}
+                  />
                 </div>
               </form>
             )}
@@ -207,16 +212,16 @@ const ForgotPassword = () => {
             {step === "otp" && (
               <form onSubmit={handleVerifyOtp}>
                 <h2 className="text-2xl font-bold text-gray-800 mb-1">
-                  Enter OTP
+                  {t("auth.forgotPassword.enterOtp")}
                 </h2>
                 <p className="text-gray-500 mb-6 break-words">
-                  We've sent a 6 digit code to{" "}
+                  {t("auth.forgotPassword.otpSentTo")}{" "}
                   <span className="font-medium text-gray-700">{email}</span>
                 </p>
 
                 <div className="space-y-2">
                   <label className="font-medium text-gray-700">
-                    One-Time Password
+                    {t("auth.forgotPassword.otpLabel")}
                   </label>
 
                   <div className="flex items-center rounded-xl border border-gray-300 bg-white px-4 py-3 focus-within:border-blue-500 transition">
@@ -243,7 +248,7 @@ const ForgotPassword = () => {
                     className="flex items-center gap-1 text-gray-500 hover:text-gray-700"
                   >
                     <FaArrowLeft size={12} />
-                    Change email
+                    {t("auth.forgotPassword.changeEmail")}
                   </button>
 
                   <button
@@ -253,13 +258,18 @@ const ForgotPassword = () => {
                     className="text-blue-600 font-medium disabled:text-gray-400"
                   >
                     {resendTimer > 0
-                      ? `Resend OTP in ${resendTimer}s`
-                      : "Resend OTP"}
+                      ? t("auth.forgotPassword.resendIn", {
+                          seconds: resendTimer,
+                        })
+                      : t("auth.forgotPassword.resendOtp")}
                   </button>
                 </div>
 
                 <div className="mt-6">
-                  <Button text="Verify OTP" loading={loading} />
+                  <Button
+                    text={t("auth.forgotPassword.verifyOtp")}
+                    loading={loading}
+                  />
                 </div>
               </form>
             )}
@@ -268,19 +278,21 @@ const ForgotPassword = () => {
             {step === "password" && (
               <form onSubmit={handleResetPassword}>
                 <h2 className="text-2xl font-bold text-gray-800 mb-1">
-                  Set new password
+                  {t("auth.forgotPassword.setNewPassword")}
                 </h2>
                 <p className="text-gray-500 mb-6">
-                  Choose a strong password for your account.
+                  {t("auth.forgotPassword.setNewPasswordSubtitle")}
                 </p>
 
                 <div className="space-y-5">
                   <div className="relative">
                     <Input
-                      label="New Password"
+                      label={t("auth.forgotPassword.newPasswordLabel")}
                       type={showPassword ? "text" : "password"}
                       name="newPassword"
-                      placeholder="At least 6 characters"
+                      placeholder={t(
+                        "auth.forgotPassword.newPasswordPlaceholder",
+                      )}
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                       icon={FaLock}
@@ -297,10 +309,12 @@ const ForgotPassword = () => {
                   </div>
 
                   <Input
-                    label="Confirm Password"
+                    label={t("auth.forgotPassword.confirmPasswordLabel")}
                     type={showPassword ? "text" : "password"}
                     name="confirmPassword"
-                    placeholder="Re-enter new password"
+                    placeholder={t(
+                      "auth.forgotPassword.confirmPasswordPlaceholder",
+                    )}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     icon={FaLock}
@@ -308,7 +322,10 @@ const ForgotPassword = () => {
                 </div>
 
                 <div className="mt-6">
-                  <Button text="Reset Password" loading={loading} />
+                  <Button
+                    text={t("auth.forgotPassword.resetPassword")}
+                    loading={loading}
+                  />
                 </div>
               </form>
             )}
@@ -321,30 +338,30 @@ const ForgotPassword = () => {
                 </div>
 
                 <h2 className="text-2xl font-bold text-gray-800 mt-5">
-                  Password reset!
+                  {t("auth.forgotPassword.successTitle")}
                 </h2>
 
                 <p className="text-gray-500 mt-2">
-                  Your password has been changed successfully.
+                  {t("auth.forgotPassword.successSubtitle")}
                 </p>
 
                 <button
                   onClick={() => navigate("/login")}
                   className="w-full mt-6 bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-lg font-semibold"
                 >
-                  Back to Login
+                  {t("auth.forgotPassword.backToLogin")}
                 </button>
               </div>
             )}
 
             {step !== "success" && (
               <p className="text-center text-gray-600 mt-6">
-                Remembered your password?
+                {t("auth.forgotPassword.rememberedPassword")}
                 <Link
                   to="/login"
                   className="text-blue-600 font-medium ml-2 hover:underline"
                 >
-                  Login
+                  {t("auth.login.submit")}
                 </Link>
               </p>
             )}

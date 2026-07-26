@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Loader from "../components/common/Loader";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import {
   FaUser,
@@ -18,6 +19,7 @@ import { useAuth } from "../context/AuthContext";
 const Register = () => {
   const navigate = useNavigate();
   const { register } = useAuth();
+  const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -40,10 +42,7 @@ const Register = () => {
     e.preventDefault();
 
     if (!form.name || !form.email || !form.password) {
-      return toast.error("Please fill all fields");
-    }
-    if(form.password.length < 6){
-      return toast.error("Please Enter 6 charecter or above.");
+      return toast.error(t("auth.register.fillAllFields"));
     }
 
     try {
@@ -52,7 +51,7 @@ const Register = () => {
       toast.success(data.message);
       navigate("/login");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Registration failed");
+      toast.error(error.response?.data?.message || t("auth.register.failed"));
     } finally {
       setLoading(false);
     }
@@ -60,16 +59,16 @@ const Register = () => {
 
   return (
     <>
-      {loading && <Loader text="User Register..." />}
+      {loading && <Loader text={t("common.pleaseWait")} />}
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex justify-center items-center px-4">
         <div className="w-full max-w-md">
           <div className="flex flex-col items-center mb-8">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center shadow-lg mb-4">
               <FaHandsHelping className="text-white text-3xl" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-800">JanSahay</h1>
+            <h1 className="text-2xl font-bold text-gray-800">{t("nav.name")}</h1>
             <p className="text-gray-500 text-sm mt-1">
-              Government schemes, made simple
+              {t("auth.brandTagline")}
             </p>
           </div>
 
@@ -77,28 +76,26 @@ const Register = () => {
             onSubmit={handleSubmit}
             className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100"
           >
-            <h2 className="text-2xl font-bold text-gray-800 mb-1">
-              Create account
+            <h2 className="text-2xl font-bold text-gray-800 mb-1 text-center">
+              {t("auth.register.createAccount")}
             </h2>
-            <p className="text-gray-500 mb-6">
-              Sign up to find schemes made for you
-            </p>
+            <p className="text-gray-500 mb-6 text-center">{t("auth.register.subtitle")}</p>
 
             <div className="space-y-5">
               <Input
-                label="Full Name"
+                label={t("auth.register.nameLabel")}
                 name="name"
-                placeholder="Your name"
+                placeholder={t("auth.register.namePlaceholder")}
                 value={form.name}
                 onChange={handleChange}
                 icon={FaUser}
               />
 
               <Input
-                label="Email"
+                label={t("auth.register.emailLabel")}
                 type="email"
                 name="email"
-                placeholder="you@example.com"
+                placeholder={t("auth.register.emailPlaceholder")}
                 value={form.email}
                 onChange={handleChange}
                 icon={FaEnvelope}
@@ -106,10 +103,10 @@ const Register = () => {
 
               <div className="relative">
                 <Input
-                  label="Password"
+                  label={t("auth.register.passwordLabel")}
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  placeholder="At least 6 characters"
+                  placeholder={t("auth.register.passwordPlaceholder")}
                   value={form.password}
                   onChange={handleChange}
                   icon={FaLock}
@@ -127,16 +124,16 @@ const Register = () => {
             </div>
 
             <div className="mt-6">
-              <Button text="Create Account" loading={loading} />
+              <Button text={t("auth.register.submit")} loading={loading} />
             </div>
 
             <p className="text-center text-gray-600 mt-6">
-              Already have an account?
+              {t("auth.register.haveAccount")}
               <Link
                 to="/login"
                 className="text-blue-600 font-medium ml-2 hover:underline"
               >
-                Login
+                {t("auth.register.loginLink")}
               </Link>
             </p>
           </form>

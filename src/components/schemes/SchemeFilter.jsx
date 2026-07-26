@@ -1,4 +1,5 @@
 import { FaSearch, FaFilter } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const SchemeFilter = ({
   search,
@@ -10,11 +11,13 @@ const SchemeFilter = ({
   sort,
   setSort,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-6 mb-8">
       <div className="flex items-center gap-2 mb-5">
         <FaFilter className="text-blue-600 text-xl" />
-        <h2 className="text-xl font-bold text-gray-800">Search & Filter</h2>
+        <h2 className="text-xl font-bold text-gray-800">{t("common.filter")}</h2>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -25,7 +28,7 @@ const SchemeFilter = ({
 
           <input
             type="text"
-            placeholder="Search schemes..."
+            placeholder={t("schemes.searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
@@ -39,25 +42,25 @@ const SchemeFilter = ({
           onChange={(e) => setSchemeType(e.target.value)}
           className="rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
         >
-          <option value="">All Categories</option>
+          <option value="">{t("common.allCategories")}</option>
 
-          <option value="Education">Education</option>
+          <option value="Education">{t("schemeCategories.education")}</option>
 
-          <option value="Agriculture">Agriculture</option>
+          <option value="Agriculture">{t("schemeCategories.agriculture")}</option>
 
-          <option value="Employment">Employment</option>
+          <option value="Employment">{t("schemeCategories.employment")}</option>
 
-          <option value="Women">Women</option>
+          <option value="Women">{t("schemeCategories.women")}</option>
 
-          <option value="Health">Health</option>
+          <option value="Health">{t("schemeCategories.health")}</option>
 
-          <option value="Business">Business</option>
+          <option value="Business">{t("schemeCategories.business")}</option>
 
-          <option value="Housing">Housing</option>
+          <option value="Housing">{t("schemeCategories.housing")}</option>
 
-          <option value="Pension">Pension</option>
+          <option value="Pension">{t("schemeCategories.pension")}</option>
 
-          <option value="Other">Other</option>
+          <option value="Other">{t("schemeCategories.other")}</option>
         </select>
 
         {/* Government */}
@@ -67,19 +70,19 @@ const SchemeFilter = ({
           onChange={(e) => setGovernment(e.target.value)}
           className="rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
         >
-          <option value="">All Government</option>
+          <option value="">{t("common.allGovernment")}</option>
 
-          <option value="Central">Central Government</option>
+          <option value="Central">{t("common.central")}</option>
 
-          <option value="State">State Government</option>
+          <option value="State">{t("common.state")}</option>
         </select>
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
           className="rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
         >
-          <option value="latest">Latest First</option>
-          <option value="oldest">Oldest First</option>
+          <option value="latest">{t("common.latestFirst")}</option>
+          <option value="oldest">{t("common.oldestFirst")}</option>
         </select>
       </div>
     </div>

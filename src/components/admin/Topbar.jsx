@@ -1,6 +1,9 @@
 import { FaBell, FaUserCircle } from "react-icons/fa";
-
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from '../common/LanguageSwitcher'
 const Topbar = ({ admin }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white rounded-2xl shadow-md px-4 sm:px-6 py-4 mb-8 border border-gray-100">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -8,11 +11,13 @@ const Topbar = ({ admin }) => {
 
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
-            Admin Dashboard
+            {t("admin.dashboardTitle")}
           </h1>
 
           <p className="text-gray-500 mt-1">
-            Welcome back, {admin?.name || "Administrator"}
+            {t("admin.welcomeBack", {
+              name: admin?.name || t("admin.administrator"),
+            })}
           </p>
         </div>
 
@@ -32,13 +37,16 @@ const Topbar = ({ admin }) => {
 
             <div className="min-w-0">
               <h3 className="font-semibold text-gray-800 truncate">
-                {admin?.name || "Admin"}
+                {admin?.name || t("admin.defaultName")}
               </h3>
 
               <p className="text-sm text-gray-500 truncate">
                 {admin?.email || "admin@example.com"}
               </p>
             </div>
+            <div className="pl-2 border-l border-gray-200">
+            <LanguageSwitcher />
+          </div>
           </div>
         </div>
       </div>

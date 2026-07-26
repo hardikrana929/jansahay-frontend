@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import Pagination from "../components/common/Pagination";
 import MainLayout from "../layouts/MainLayout";
 import Loader from "../components/common/Loader";
@@ -15,8 +16,10 @@ import {
   addFavorite,
   removeFavorite,
 } from "../services/recommendationService";
+import useDebounce from "../hooks/useDebounce";
 
 const Recommendation = () => {
+  const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -26,28 +29,36 @@ const Recommendation = () => {
   const [sort, setSort] = useState("latest");
 
   const [loading, setLoading] = useState(true);
+  const [fetching, setFetching] = useState(false);
+  const isFirstLoad = useRef(true);
 
   const [recommendations, setRecommendations] = useState([]);
 
   const [favorites, setFavorites] = useState([]);
 
+  const debouncedSearch = useDebounce(search, 500);
+
   useEffect(() => {
     fetchData();
-  }, [page, search, schemeType, government, sort]);
+  }, [page, debouncedSearch, schemeType, government, sort]);
 
   useEffect(() => {
     setPage(1);
-  }, [search, schemeType, government, sort]);
+  }, [debouncedSearch, schemeType, government, sort]);
 
   const fetchData = async () => {
     try {
-      setLoading(true);
+      if (isFirstLoad.current) {
+        setLoading(true);
+      } else {
+        setFetching(true);
+      }
 
       const [recommendationRes, favoriteRes] = await Promise.all([
         getRecommendations({
           page,
           limit: 9,
-          search,
+          search: debouncedSearch,
           schemeType,
           government,
           sort,
@@ -66,10 +77,12 @@ const Recommendation = () => {
       setFavorites(favoriteIds);
     } catch (error) {
       toast.error(
-        error.response?.data?.message || "Unable to load recommendations.",
+        error.response?.data?.message || t("recommendations.unableToLoad"),
       );
     } finally {
       setLoading(false);
+      setFetching(false);
+      isFirstLoad.current = false;
     }
   };
 
@@ -80,69 +93,35 @@ const Recommendation = () => {
 
         setFavorites((prev) => prev.filter((id) => id !== schemeId));
 
-        toast.success("Removed from favorites");
+        toast.success(t("recommendations.removedFromFavorites"));
       } else {
         await addFavorite(schemeId);
 
         setFavorites((prev) => [...prev, schemeId]);
 
-        toast.success("Added to favorites");
+        toast.success(t("recommendations.addedToFavorites"));
       }
     } catch (error) {
       toast.error(error.response?.data?.message);
     }
   };
 
-  const filteredSchemes = useMemo(() => {
-    let filtered = [...recommendations];
-
-    // Search
-    if (search.trim()) {
-      filtered = filtered.filter(
-        (scheme) =>
-          scheme.title.toLowerCase().includes(search.toLowerCase()) ||
-          scheme.description.toLowerCase().includes(search.toLowerCase()),
-      );
-    }
-
-    // Scheme Type
-    if (schemeType) {
-      filtered = filtered.filter((scheme) => scheme.schemeType === schemeType);
-    }
-
-    // Government
-    if (government) {
-      filtered = filtered.filter((scheme) => scheme.government === government);
-    }
-
-    // Sort
-    filtered.sort((a, b) => {
-      if (sort === "latest") {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      }
-
-      return new Date(a.createdAt) - new Date(b.createdAt);
-    });
-
-    return filtered;
-  }, [recommendations, search, schemeType, government, sort]);
-
   if (loading) {
-    return <Loader text="Loading Recommendations..." />;
+    return <Loader text={t("common.loadingRecommendations")} />;
   }
 
   return (
     <MainLayout>
       <div className="flex flex-wrap gap-3 justify-between items-center mt-8">
-        <h2 className="text-xl font-bold">Available Recommendations</h2>
+        <h2 className="text-xl font-bold">{t("recommendations.available")}</h2>
 
         <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
-          {recommendations.length} Schemes
+          {t("recommendations.count", { count: recommendations.length })}
         </span>
       </div>
       <PageHeader
-        title="Recommended Government Schemes"
-        subtitle="These schemes are selected based on your profile information and eligibility."
+        title={t("recommendations.title")}
+        subtitle={t("recommendations.subtitle")}
       />
 
       <RecommendationFilter
@@ -159,7 +138,11 @@ const Recommendation = () => {
       {recommendations.length === 0 ? (
         <EmptyRecommendation />
       ) : (
-        <>
+        <div
+          className={`transition-opacity duration-200 ${
+            fetching ? "opacity-50 pointer-events-none" : "opacity-100"
+          }`}
+        >
           <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-8">
             {recommendations.map((scheme) => (
               <RecommendationCard
@@ -175,7 +158,7 @@ const Recommendation = () => {
             totalPages={totalPages}
             onPageChange={setPage}
           />
-        </>
+        </div>
       )}
     </MainLayout>
   );

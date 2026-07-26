@@ -1,35 +1,35 @@
+import { useTranslation } from "react-i18next";
 import { FaUserGraduate, FaSearch, FaHeart } from "react-icons/fa";
 
 const Feature = () => {
+  const { t } = useTranslation();
+
   const features = [
     {
       icon: <FaSearch size={40} />,
-      title: "Search Schemes",
-      desc: "Search all government schemes easily.",
+      title: t("home.features.search.title"),
+      desc: t("home.features.search.desc"),
     },
 
     {
       icon: <FaUserGraduate size={40} />,
-      title: "Smart Recommendation",
-      desc: "Get schemes based on your profile.",
+      title: t("home.features.recommend.title"),
+      desc: t("home.features.recommend.desc"),
     },
 
     {
       icon: <FaHeart size={40} />,
-      title: "Save Favorites",
-      desc: "Bookmark schemes to view later.",
+      title: t("home.features.save.title"),
+      desc: t("home.features.save.desc"),
     },
   ];
 
   return (
     <section className="max-w-7xl mx-auto py-20 px-5">
       <div className="text-center max-w-2xl mx-auto">
-        <h2 className="text-4xl font-bold">Why Choose JanSahay?</h2>
+        <h2 className="text-4xl font-bold">{t("home.features.heading")}</h2>
 
-        <p className="mt-4 text-gray-500">
-          Everything you need to find and apply for the right scheme, in one
-          place.
-        </p>
+        <p className="mt-4 text-gray-500">{t("home.features.subheading")}</p>
       </div>
 
       <div className="grid md:grid-cols-3 gap-8 mt-16">

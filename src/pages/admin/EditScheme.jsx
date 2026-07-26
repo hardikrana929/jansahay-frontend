@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import AdminLayout from "../../layouts/AdminLayout";
 import Loader from "../../components/common/Loader";
@@ -8,7 +9,11 @@ import Input from "../../components/common/Input";
 import SelectInput from "../../components/common/SelectInput";
 import Button from "../../components/common/Button";
 
-import { getScheme, updateScheme } from "../../services/adminService";
+import {
+  getScheme,
+  updateScheme,
+  toggleSchemeStatus,
+} from "../../services/adminService";
 
 const SCHEME_TYPES = [
   "Education",
@@ -24,11 +29,14 @@ const SCHEME_TYPES = [
 const GOVERNMENTS = ["Central", "State"];
 
 const EditScheme = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [toggling, setToggling] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   const [form, setForm] = useState({
     title: "",
@@ -54,6 +62,8 @@ const EditScheme = () => {
       const res = await getScheme(id);
       const s = res.scheme;
 
+      setIsActive(s.isActive ?? true);
+
       setForm({
         title: s.title || "",
         description: s.description || "",
@@ -71,7 +81,9 @@ const EditScheme = () => {
           : "",
       });
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to load scheme");
+      toast.error(
+        error.response?.data?.message || t("admin.failedToLoadScheme"),
+      );
     } finally {
       setLoading(false);
     }
@@ -80,6 +92,21 @@ const EditScheme = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleToggleStatus = async () => {
+    try {
+      setToggling(true);
+
+      const res = await toggleSchemeStatus(id);
+      toast.success(res.message);
+
+      setIsActive(res.isActive);
+    } catch (error) {
+      toast.error(error.response?.data?.message || t("profile.somethingWrong"));
+    } finally {
+      setToggling(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -99,7 +126,7 @@ const EditScheme = () => {
       toast.success(res.message);
       navigate("/admin/manage-schemes");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update scheme");
+      toast.error(error.response?.data?.message || t("admin.failedToUpdate"));
     } finally {
       setSaving(false);
     }
@@ -108,28 +135,59 @@ const EditScheme = () => {
   if (loading) {
     return (
       <AdminLayout>
-        <Loader text="Loading scheme..." />
+        <Loader text={t("common.loadingScheme")} />
       </AdminLayout>
     );
   }
 
   return (
     <AdminLayout>
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Edit Scheme</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+          {t("admin.editSchemeTitle")}
+        </h1>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+              isActive
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {isActive ? t("admin.active") : t("admin.inactive")}
+          </span>
+
+          <button
+            type="button"
+            onClick={handleToggleStatus}
+            disabled={toggling}
+            className={`px-4 py-2 rounded-lg text-white font-medium transition duration-200 disabled:opacity-60 ${
+              isActive
+                ? "bg-red-600 hover:bg-red-700"
+                : "bg-green-600 hover:bg-green-700"
+            }`}
+          >
+            {isActive ? t("admin.deactivate") : t("admin.activate")}
+          </button>
+        </div>
+      </div>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-2xl shadow-md p-5 sm:p-8 space-y-5 border border-gray-100"
+        className="bg-white rounded-2xl shadow-md p-4 sm:p-6 lg:p-8 space-y-5 border border-gray-100"
       >
         <Input
-          label="Title"
+          label={t("admin.formTitle")}
           name="title"
           value={form.title}
           onChange={handleChange}
         />
 
         <div className="space-y-2">
-          <label className="font-medium text-gray-700">Description</label>
+          <label className="font-medium text-gray-700">
+            {t("schemeDetails.description")}
+          </label>
           <textarea
             name="description"
             rows={4}
@@ -141,15 +199,15 @@ const EditScheme = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <SelectInput
-            label="Scheme Type"
+            label={t("admin.formSchemeType")}
             name="schemeType"
             value={form.schemeType}
             onChange={handleChange}
-            options={SCHEME_TYPES.map((t) => ({ label: t, value: t }))}
+            options={SCHEME_TYPES.map((type) => ({ label: type, value: type }))}
           />
 
           <SelectInput
-            label="Government"
+            label={t("schemes.governmentLabel")}
             name="government"
             value={form.government}
             onChange={handleChange}
@@ -158,7 +216,7 @@ const EditScheme = () => {
         </div>
 
         <Input
-          label="State (or 'All')"
+          label={t("admin.formStateOrAll")}
           name="state"
           value={form.state}
           onChange={handleChange}
@@ -166,21 +224,21 @@ const EditScheme = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <Input
-            label="Income Limit"
+            label={t("schemes.incomeLimit")}
             name="incomeLimit"
             type="number"
             value={form.incomeLimit}
             onChange={handleChange}
           />
           <Input
-            label="Min Age"
+            label={t("admin.formMinAge")}
             name="minAge"
             type="number"
             value={form.minAge}
             onChange={handleChange}
           />
           <Input
-            label="Max Age"
+            label={t("admin.formMaxAge")}
             name="maxAge"
             type="number"
             value={form.maxAge}
@@ -189,7 +247,9 @@ const EditScheme = () => {
         </div>
 
         <div className="space-y-2">
-          <label className="font-medium text-gray-700">Benefits</label>
+          <label className="font-medium text-gray-700">
+            {t("schemeDetails.benefits")}
+          </label>
           <textarea
             name="benefits"
             rows={3}
@@ -200,28 +260,28 @@ const EditScheme = () => {
         </div>
 
         <Input
-          label="Documents Required (comma separated)"
+          label={t("admin.formDocumentsRequired")}
           name="documentsRequired"
           value={form.documentsRequired}
           onChange={handleChange}
         />
 
         <Input
-          label="Official Link"
+          label={t("admin.formOfficialLink")}
           name="officialLink"
           value={form.officialLink}
           onChange={handleChange}
         />
 
         <Input
-          label="Application Deadline"
+          label={t("schemeDetails.applicationDeadline")}
           name="applicationDeadline"
           type="date"
           value={form.applicationDeadline}
           onChange={handleChange}
         />
 
-        <Button text="Update Scheme" loading={saving} />
+        <Button text={t("admin.formUpdateScheme")} loading={saving} />
       </form>
     </AdminLayout>
   );

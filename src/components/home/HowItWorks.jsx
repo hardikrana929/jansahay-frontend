@@ -1,37 +1,38 @@
+import { useTranslation } from "react-i18next";
 import { FaUserEdit, FaMagic, FaFileSignature } from "react-icons/fa";
 
-const steps = [
-  {
-    icon: <FaUserEdit size={28} />,
-    step: "01",
-    title: "Complete Your Profile",
-    desc: "Tell us your age, income, occupation, state, and category — it takes less than 2 minutes.",
-  },
-  {
-    icon: <FaMagic size={28} />,
-    step: "02",
-    title: "Get Matched Instantly",
-    desc: "Our engine compares your profile against every active scheme and shows only the ones you're eligible for.",
-  },
-  {
-    icon: <FaFileSignature size={28} />,
-    step: "03",
-    title: "Apply With Confidence",
-    desc: "Review benefits and required documents, then head straight to the official government portal to apply.",
-  },
-];
-
 const HowItWorks = () => {
+  const { t } = useTranslation();
+
+  const steps = [
+    {
+      icon: <FaUserEdit size={28} />,
+      step: "01",
+      title: t("home.how.step1.title"),
+      desc: t("home.how.step1.desc"),
+    },
+    {
+      icon: <FaMagic size={28} />,
+      step: "02",
+      title: t("home.how.step2.title"),
+      desc: t("home.how.step2.desc"),
+    },
+    {
+      icon: <FaFileSignature size={28} />,
+      step: "03",
+      title: t("home.how.step3.title"),
+      desc: t("home.how.step3.desc"),
+    },
+  ];
+
   return (
     <section className="bg-gray-50 py-20 px-5">
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-4xl font-bold text-gray-800">
-            How JanSahay Works
+            {t("home.how.heading")}
           </h2>
-          <p className="mt-4 text-gray-500">
-            Three simple steps between you and the benefits you deserve.
-          </p>
+          <p className="mt-4 text-gray-500">{t("home.how.subheading")}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mt-16">

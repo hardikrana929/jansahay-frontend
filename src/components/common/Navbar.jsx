@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
@@ -13,6 +16,8 @@ const Navbar = () => {
     navigate("/login");
     setIsOpen(false);
   };
+
+  const token = localStorage.getItem("token");
 
   const closeMenu = () => setIsOpen(false);
 
@@ -31,41 +36,43 @@ const Navbar = () => {
               width="50"
               className="w-9 h-9 sm:w-[50px] sm:h-[50px]"
             />
-            JanSahay
+            {t("nav.name")}
           </div>
         </Link>
 
         {/* Desktop menu */}
         <div className="hidden lg:flex gap-6 items-center">
-          <Link to="/">Home</Link>
+          <Link to="/" className={token ? "hidden" : "block"}>
+            {t("nav.home")}
+          </Link>
 
-          <Link to="/schemes">Schemes</Link>
+          <Link to="/schemes">{t("nav.schemes")}</Link>
 
           {user && (
             <>
               <Link
                 to={user.role === "admin" ? "/admin/dashboard" : "/dashboard"}
               >
-                Dashboard
+                {t("nav.dashboard")}
               </Link>
 
-              <Link to="/recommendations">Recommendations</Link>
+              <Link to="/recommendations">{t("nav.recommendations")}</Link>
 
-              <Link to="/favorites">Favorites</Link>
+              <Link to="/favorites">{t("nav.favorites")}</Link>
             </>
           )}
 
           {!user ? (
             <>
               <Link to="/login" className="text-blue-600">
-                Login
+                {t("nav.login")}
               </Link>
 
               <Link
                 to="/register"
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg"
               >
-                Register
+                {t("nav.register")}
               </Link>
             </>
           ) : (
@@ -78,10 +85,15 @@ const Navbar = () => {
                 onClick={handleLogout}
                 className="bg-red-500 text-white px-4 py-2 rounded-lg"
               >
-                Logout
+                {t("nav.logout")}
               </button>
             </>
           )}
+
+          <div className="pl-2 border-l border-gray-200">
+            <LanguageSwitcher />
+          </div>
+          <Link to="/feedback">{t("nav.feedback")}</Link>
         </div>
 
         {/* Mobile menu toggle */}
@@ -97,7 +109,7 @@ const Navbar = () => {
       {/* Mobile menu panel */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-[28rem]" : "max-h-0"
+          isOpen ? "max-h-[32rem]" : "max-h-0"
         }`}
       >
         <div className="px-4 sm:px-5 pb-5 pt-1 flex flex-col gap-1 border-t border-gray-100">
@@ -106,7 +118,7 @@ const Navbar = () => {
             onClick={closeMenu}
             className="py-3 px-2 rounded-lg hover:bg-gray-50"
           >
-            Home
+            {t("nav.home")}
           </Link>
 
           <Link
@@ -114,7 +126,7 @@ const Navbar = () => {
             onClick={closeMenu}
             className="py-3 px-2 rounded-lg hover:bg-gray-50"
           >
-            Schemes
+            {t("nav.schemes")}
           </Link>
 
           {user && (
@@ -124,7 +136,7 @@ const Navbar = () => {
                 onClick={closeMenu}
                 className="py-3 px-2 rounded-lg hover:bg-gray-50"
               >
-                Dashboard
+                {t("nav.dashboard")}
               </Link>
 
               <Link
@@ -132,7 +144,7 @@ const Navbar = () => {
                 onClick={closeMenu}
                 className="py-3 px-2 rounded-lg hover:bg-gray-50"
               >
-                Recommendations
+                {t("nav.recommendations")}
               </Link>
 
               <Link
@@ -140,7 +152,7 @@ const Navbar = () => {
                 onClick={closeMenu}
                 className="py-3 px-2 rounded-lg hover:bg-gray-50"
               >
-                Favorites
+                {t("nav.favorites")}
               </Link>
             </>
           )}
@@ -152,7 +164,7 @@ const Navbar = () => {
                 onClick={closeMenu}
                 className="text-center text-blue-600 border border-blue-600 px-4 py-2.5 rounded-lg"
               >
-                Login
+                {t("nav.login")}
               </Link>
 
               <Link
@@ -160,7 +172,7 @@ const Navbar = () => {
                 onClick={closeMenu}
                 className="text-center bg-blue-600 text-white px-4 py-2.5 rounded-lg"
               >
-                Register
+                {t("nav.register")}
               </Link>
             </div>
           ) : (
@@ -171,10 +183,15 @@ const Navbar = () => {
                 onClick={handleLogout}
                 className="bg-red-500 text-white px-4 py-2.5 rounded-lg shrink-0"
               >
-                Logout
+                {t("nav.logout")}
               </button>
             </div>
           )}
+
+          <div className="mt-3 pt-3 border-t border-gray-100">
+            <LanguageSwitcher variant="mobile" />
+          </div>
+          <Link to="/feedback">{t("nav.feedback")}</Link>
         </div>
       </div>
     </nav>

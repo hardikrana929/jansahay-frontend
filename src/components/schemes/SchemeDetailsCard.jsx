@@ -9,8 +9,11 @@ import {
   FaWheelchair,
   FaCheckCircle,
 } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const SchemeDetailsCard = ({ scheme }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
       {/* Header */}
@@ -27,31 +30,33 @@ const SchemeDetailsCard = ({ scheme }) => {
         {/* Basic Information */}
 
         <section>
-          <h2 className="text-xl font-bold mb-5">Basic Information</h2>
+          <h2 className="text-xl font-bold mb-5">
+            {t("schemeDetails.basicInfo")}
+          </h2>
 
           <div className="grid md:grid-cols-2 gap-5">
             <InfoRow
               icon={<FaUniversity />}
-              label="Government"
+              label={t("schemes.governmentLabel")}
               value={scheme.government}
             />
 
             <InfoRow
               icon={<FaMapMarkerAlt />}
-              label="State"
+              label={t("profile.state")}
               value={scheme.state}
             />
 
             <InfoRow
               icon={<FaMoneyBillWave />}
-              label="Income Limit"
+              label={t("schemes.incomeLimit")}
               value={`₹${scheme.incomeLimit.toLocaleString()}`}
             />
 
             <InfoRow
               icon={<FaCalendarAlt />}
-              label="Age"
-              value={`${scheme.minAge} - ${scheme.maxAge} Years`}
+              label={t("schemes.ageRange")}
+              value={`${scheme.minAge} - ${scheme.maxAge} ${t("schemeDetails.years")}`}
             />
           </div>
         </section>
@@ -59,7 +64,9 @@ const SchemeDetailsCard = ({ scheme }) => {
         {/* Benefits */}
 
         <section>
-          <h2 className="text-xl font-bold mb-4">Benefits</h2>
+          <h2 className="text-xl font-bold mb-4">
+            {t("schemeDetails.benefits")}
+          </h2>
 
           <div className="bg-green-50 border border-green-100 rounded-xl p-5">
             {scheme.benefits}
@@ -69,33 +76,39 @@ const SchemeDetailsCard = ({ scheme }) => {
         {/* Eligibility */}
 
         <section>
-          <h2 className="text-xl font-bold mb-5">Eligibility</h2>
+          <h2 className="text-xl font-bold mb-5">
+            {t("schemeDetails.eligibility")}
+          </h2>
 
           <div className="space-y-4">
             <InfoRow
               icon={<FaUserGraduate />}
-              label="Occupation"
+              label={t("schemeDetails.occupation")}
               value={
                 scheme.eligibleOccupations?.length
                   ? scheme.eligibleOccupations.join(", ")
-                  : "All"
+                  : t("schemeDetails.all")
               }
             />
 
             <InfoRow
               icon={<FaUniversity />}
-              label="Category"
+              label={t("schemeDetails.category")}
               value={
                 scheme.eligibleCategories?.length
                   ? scheme.eligibleCategories.join(", ")
-                  : "All"
+                  : t("schemeDetails.all")
               }
             />
 
             <InfoRow
               icon={<FaWheelchair />}
-              label="Disability Required"
-              value={scheme.disabilityRequired ? "Yes" : "No"}
+              label={t("schemeDetails.disabilityRequired")}
+              value={
+                scheme.disabilityRequired
+                  ? t("schemeDetails.yes")
+                  : t("schemeDetails.no")
+              }
             />
           </div>
         </section>
@@ -105,7 +118,7 @@ const SchemeDetailsCard = ({ scheme }) => {
         <section>
           <h2 className="text-xl font-bold mb-5 flex items-center gap-2">
             <FaFileAlt />
-            Required Documents
+            {t("schemeDetails.documentsRequired")}
           </h2>
 
           {scheme.documentsRequired?.length ? (
@@ -122,7 +135,7 @@ const SchemeDetailsCard = ({ scheme }) => {
               ))}
             </ul>
           ) : (
-            <p className="text-gray-500">No documents specified.</p>
+            <p className="text-gray-500">{t("schemeDetails.noDocuments")}</p>
           )}
         </section>
 
@@ -130,7 +143,9 @@ const SchemeDetailsCard = ({ scheme }) => {
 
         {scheme.applicationDeadline && (
           <section>
-            <h2 className="text-xl font-bold mb-3">Application Deadline</h2>
+            <h2 className="text-xl font-bold mb-3">
+              {t("schemeDetails.applicationDeadline")}
+            </h2>
 
             <div className="bg-red-50 text-red-700 border border-red-100 rounded-lg p-4">
               {new Date(scheme.applicationDeadline).toLocaleDateString()}
@@ -147,7 +162,7 @@ const SchemeDetailsCard = ({ scheme }) => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition"
           >
-            Visit Official Website
+            {t("schemeDetails.visitWebsite")}
             <FaExternalLinkAlt />
           </a>
         </div>

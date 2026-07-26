@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   FaTachometerAlt,
   FaClipboardList,
@@ -6,34 +7,42 @@ import {
   FaUserCircle,
   FaSignOutAlt,
   FaTimes,
+  FaCommentDots,
 } from "react-icons/fa";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
+  const { t } = useTranslation();
+
   const menuItems = [
     {
-      title: "Dashboard",
+      title: t("admin.dashboardMenu"),
       path: "/admin/dashboard",
       icon: <FaTachometerAlt />,
     },
     {
-      title: "Manage Schemes",
+      title: t("admin.manageSchemesMenu"),
       path: "/admin/manage-schemes",
       icon: <FaClipboardList />,
     },
     {
-      title: "Show All Schemes",
+      title: t("admin.showAllSchemesMenu"),
       path: "/schemes",
       icon: <FaClipboardList />,
     },
     {
-      title: "Create Scheme",
+      title: t("admin.createSchemeMenu"),
       path: "/admin/add-scheme",
       icon: <FaPlusCircle />,
     },
     {
-      title: "Profile",
+      title: t("admin.profileMenu"),
       path: "/profile",
       icon: <FaUserCircle />,
+    },
+    {
+      title: t("admin.feedbackMenu"),
+      path: "/admin/manage-feedback",
+      icon: <FaCommentDots />,
     },
   ];
 
@@ -74,9 +83,9 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
         <div className="flex items-center justify-between px-6 py-6 border-b border-blue-600">
           <div>
-            <h1 className="text-3xl font-bold">JanSahay</h1>
+            <h1 className="text-3xl font-bold">{t("nav.name")}</h1>
 
-            <p className="text-sm text-blue-200 mt-1">Admin Panel</p>
+            <p className="text-sm text-blue-200 mt-1">{t("admin.panel")}</p>
           </div>
 
           <button className="lg:hidden" onClick={() => setIsOpen(false)}>
@@ -116,7 +125,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             className="w-full flex items-center justify-center gap-3 bg-red-500 hover:bg-red-600 py-3 rounded-xl transition"
           >
             <FaSignOutAlt />
-            Logout
+            {t("admin.logout")}
           </button>
         </div>
       </aside>

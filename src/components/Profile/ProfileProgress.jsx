@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 const ProfileProgress = ({ profile }) => {
+  const { t } = useTranslation();
+
   const fields = [
     profile?.age,
     profile?.gender,
@@ -17,7 +21,7 @@ const ProfileProgress = ({ profile }) => {
   return (
     <div className="bg-white rounded-2xl shadow-md p-6">
       <div className="flex justify-between mb-4">
-        <h3 className="font-bold text-lg">Profile Completion</h3>
+        <h3 className="font-bold text-lg">{t("profile.completionTitle")}</h3>
 
         <span className="font-semibold text-blue-600">{percent}%</span>
       </div>

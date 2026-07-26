@@ -4,14 +4,15 @@ import { Toaster } from "react-hot-toast";
 
 import App from "./App";
 import "./index.css";
+import "./i18n";
 
 import { AuthProvider } from "./context/AuthContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <BrowserRouter>
-        <AuthProvider>
-            <Toaster position="top-right" />
-            <App />
-        </AuthProvider>
-    </BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
+      <Toaster position="top-right" />
+      <App />
+    </AuthProvider>
+  </BrowserRouter>,
 );

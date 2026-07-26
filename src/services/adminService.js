@@ -47,3 +47,20 @@ export const getScheme = async (id) => {
     const { data } = await api.get(`/admin/schemes/${id}`);
     return data;
 };
+
+export const getFeedbackStats = async () => {
+    const { data } = await api.get("/admin/feedback/stats");
+    return data;
+};
+
+export const getAllFeedback = async (rating) => {
+    const { data } = await api.get("/admin/feedback", {
+        params: rating ? { rating } : {},
+    });
+    return data;
+};
+
+export const deleteFeedback = async (id) => {
+    const { data } = await api.delete(`/admin/feedback/${id}`);
+    return data;
+};

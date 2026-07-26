@@ -11,9 +11,13 @@ import {
   FaWheelchair,
 } from "react-icons/fa";
 
+import { useTranslation } from "react-i18next";
+
 import EligibilityBadge from "./EligibilityBadge";
 
 const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white rounded-2xl shadow-md border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
       {/* Header */}
@@ -45,7 +49,9 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
         {/* Description */}
 
         <div>
-          <h3 className="font-semibold mb-2">Description</h3>
+          <h3 className="font-semibold mb-2">
+            {t("schemeDetails.basicInfo")}
+          </h3>
 
           <p className="text-gray-600 text-sm leading-6">
             {scheme.description}
@@ -55,7 +61,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
         {/* Benefits */}
 
         <div>
-          <h3 className="font-semibold mb-2">Benefits</h3>
+          <h3 className="font-semibold mb-2">{t("schemeDetails.benefits")}</h3>
 
           <p className="text-gray-600 text-sm">{scheme.benefits}</p>
         </div>
@@ -77,10 +83,10 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
             <FaUserGraduate className="text-blue-600" />
 
             <span className="text-sm">
-              Occupation:
+              {t("schemeDetails.occupation")}:{" "}
               {scheme.eligibleOccupations.length > 0
                 ? scheme.eligibleOccupations.join(", ")
-                : " All"}
+                : t("schemeDetails.all")}
             </span>
           </div>
 
@@ -88,7 +94,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
             <FaMoneyBillWave className="text-green-600" />
 
             <span className="text-sm">
-              Income Limit: ₹{scheme.incomeLimit.toLocaleString()}
+              {t("schemes.incomeLimit")}: ₹{scheme.incomeLimit.toLocaleString()}
             </span>
           </div>
 
@@ -96,8 +102,8 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
             <FaCalendarAlt className="text-orange-500" />
 
             <span className="text-sm">
-              Age:
-              {scheme.minAge} - {scheme.maxAge} Years
+              {t("schemes.ageRange")}: {scheme.minAge} - {scheme.maxAge}{" "}
+              {t("schemeDetails.years")}
             </span>
           </div>
 
@@ -105,8 +111,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
             <FaMapMarkerAlt className="text-red-500" />
 
             <span className="text-sm">
-              State:
-              {scheme.state}
+              {t("profile.state")}: {scheme.state}
             </span>
           </div>
 
@@ -114,10 +119,10 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
             <FaUniversity className="text-indigo-500" />
 
             <span className="text-sm">
-              Category:
+              {t("schemeDetails.category")}:{" "}
               {scheme.eligibleCategories.length > 0
                 ? scheme.eligibleCategories.join(", ")
-                : " All"}
+                : t("schemeDetails.all")}
             </span>
           </div>
 
@@ -125,7 +130,9 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
             <div className="flex items-center gap-2">
               <FaWheelchair className="text-purple-600" />
 
-              <span className="text-sm">Disability Certificate Required</span>
+              <span className="text-sm">
+                {t("schemeDetails.disabilityCertRequired")}
+              </span>
             </div>
           )}
         </div>
@@ -136,7 +143,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
           <div>
             <h3 className="font-semibold mb-2 flex items-center gap-2">
               <FaFileAlt />
-              Documents Required
+              {t("schemeDetails.documentsRequired")}
             </h3>
 
             <ul className="list-disc ml-6 text-sm text-gray-600 space-y-1">
@@ -153,7 +160,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
           <div>
             {scheme.applicationDeadline && (
               <p className="text-xs text-red-500">
-                Last Date:
+                {t("schemeDetails.applicationDeadline")}:{" "}
                 {new Date(scheme.applicationDeadline).toLocaleDateString()}
               </p>
             )}
@@ -165,7 +172,7 @@ const RecommendationCard = ({ scheme, favorite, onFavorite }) => {
             rel="noreferrer"
             className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition"
           >
-            Official Website
+            {t("common.officialWebsite")}
             <FaExternalLinkAlt />
           </a>
         </div>

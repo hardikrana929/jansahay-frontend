@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import MainLayout from "../layouts/MainLayout";
 import Loader from "../components/common/Loader";
@@ -11,9 +12,13 @@ import SchemeFilter from "../components/schemes/SchemeFilter";
 import EmptyScheme from "../components/schemes/EmptyScheme";
 
 import { getSchemes } from "../services/schemeService";
+import useDebounce from "../hooks/useDebounce";
 
 const Schemes = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
+  const [fetching, setFetching] = useState(false);
+  const isFirstLoad = useRef(true);
 
   const [schemes, setSchemes] = useState([]);
 
@@ -25,18 +30,24 @@ const Schemes = () => {
   const [government, setGovernment] = useState("");
   const [sort, setSort] = useState("latest");
 
+  const debouncedSearch = useDebounce(search, 500);
+
   useEffect(() => {
     loadSchemes();
-  }, [page, search, schemeType, government, sort]);
+  }, [page, debouncedSearch, schemeType, government, sort]);
 
   const loadSchemes = async () => {
-    setLoading(true);
+    if (isFirstLoad.current) {
+      setLoading(true);
+    } else {
+      setFetching(true);
+    }
 
     try {
       const res = await getSchemes({
         page,
         limit: 9,
-        search,
+        search: debouncedSearch,
         schemeType,
         government,
         sort,
@@ -45,27 +56,29 @@ const Schemes = () => {
       setSchemes(res.schemes || []);
       setTotalPages(res.totalPages || 1);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Unable to load schemes.");
+      toast.error(error.response?.data?.message || t("schemes.unableToLoad"));
     } finally {
       setLoading(false);
+      setFetching(false);
+      isFirstLoad.current = false;
     }
   };
 
   // Reset to first page whenever filters change
   useEffect(() => {
     setPage(1);
-  }, [search, schemeType, government, sort]);
+  }, [debouncedSearch, schemeType, government, sort]);
 
   if (loading) {
-    return <Loader text="Loading Schemes..." />;
+    return <Loader text={t("common.loadingSchemes")} />;
   }
 
   return (
     <>
       <MainLayout>
         <PageHeader
-          title="Government Schemes"
-          subtitle="Browse all available government schemes."
+          title={t("schemes.title")}
+          subtitle={t("schemes.subtitle")}
         />
 
         <SchemeFilter
@@ -80,30 +93,36 @@ const Schemes = () => {
         />
 
         <div className="flex flex-wrap gap-3 justify-between items-center mt-8 mb-5">
-          <h2 className="text-2xl font-bold">Available Schemes</h2>
+          <h2 className="text-2xl font-bold">{t("schemes.available")}</h2>
 
           <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">
-            {schemes.length} Schemes
+            {t("schemes.count", { count: schemes.length })}
           </span>
         </div>
 
-        {schemes.length === 0 ? (
-          <EmptyScheme />
-        ) : (
-          <>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {schemes.map((scheme) => (
-                <SchemeCard key={scheme._id} scheme={scheme} />
-              ))}
-            </div>
+        <div
+          className={`transition-opacity duration-200 ${
+            fetching ? "opacity-50 pointer-events-none" : "opacity-100"
+          }`}
+        >
+          {schemes.length === 0 ? (
+            <EmptyScheme />
+          ) : (
+            <>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {schemes.map((scheme) => (
+                  <SchemeCard key={scheme._id} scheme={scheme} />
+                ))}
+              </div>
 
-            <Pagination
-              page={page}
-              totalPages={totalPages}
-              onPageChange={setPage}
-            />
-          </>
-        )}
+              <Pagination
+                page={page}
+                totalPages={totalPages}
+                onPageChange={setPage}
+              />
+            </>
+          )}
+        </div>
       </MainLayout>
     </>
   );

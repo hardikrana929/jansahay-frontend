@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaArrowRight, FaFileAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const RecentSchemeCard = ({ scheme }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-6 hover:shadow-xl transition-all duration-300">
       <div className="flex items-center gap-4">
@@ -22,7 +25,7 @@ const RecentSchemeCard = ({ scheme }) => {
         to={`/schemes/${scheme._id}`}
         className="mt-5 inline-flex items-center gap-2 text-blue-600 font-semibold hover:underline"
       >
-        View Scheme
+        {t("dashboard.viewScheme")}
         <FaArrowRight />
       </Link>
     </div>

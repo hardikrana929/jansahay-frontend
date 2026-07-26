@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   FaArrowRight,
   FaCheckCircle,
@@ -13,6 +14,7 @@ const heroImage =
 
 const Hero = () => {
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   const primaryLink = !user
     ? "/register"
@@ -20,7 +22,9 @@ const Hero = () => {
       ? "/admin/dashboard"
       : "/schemes";
 
-  const primaryText = !user ? "Get Started" : "Browse Schemes";
+  const primaryText = !user
+    ? t("home.hero.getStarted")
+    : t("home.hero.browseSchemes");
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-green-500 text-white">
@@ -36,20 +40,17 @@ const Hero = () => {
           transition={{ duration: 0.5 }}
         >
           <span className="inline-block bg-white/15 backdrop-blur-sm text-sm font-medium px-4 py-1.5 rounded-full border border-white/20">
-            Helping Every Citizen Discover the Government Benefits They Deserve.
+            {t("home.hero.badge")}
           </span>
 
           <h1 className="mt-6 text-3xl sm:text-4xl md:text-6xl font-bold leading-tight">
-            Find Government Schemes
+            {t("home.hero.titleLine1")}
             <br />
-            Made For You
+            {t("home.hero.titleLine2")}
           </h1>
 
           <p className="mt-6 text-lg text-blue-50 max-w-xl leading-relaxed">
-            JanSahay matches your profile — age, income, occupation, and state —
-            against real central and state government schemes, so you only see
-            the scholarships, subsidies, pensions, and benefits you actually
-            qualify for.
+            {t("home.hero.description")}
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -65,19 +66,19 @@ const Hero = () => {
               to="/schemes"
               className="inline-flex items-center gap-2 border-2 border-white/70 px-7 py-3.5 rounded-xl font-semibold hover:bg-white/10 transition"
             >
-              Explore All Schemes
+              {t("home.hero.exploreAll")}
             </Link>
           </div>
 
           <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-blue-50">
             <span className="flex items-center gap-2">
-              <FaCheckCircle /> 100% Free to Use
+              <FaCheckCircle /> {t("home.hero.freeToUse")}
             </span>
             <span className="flex items-center gap-2">
-              <FaShieldAlt /> All States & Categories
+              <FaShieldAlt /> {t("home.hero.allStates")}
             </span>
             <span className="flex items-center gap-2">
-              <FaBolt /> Instant Recommendations
+              <FaBolt /> {t("home.hero.instant")}
             </span>
           </div>
         </motion.div>

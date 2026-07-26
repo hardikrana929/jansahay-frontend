@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaArrowRight, FaUserCircle } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const WelcomeCard = ({ profile }) => {
-  const name = profile?.user?.name || "User";
+  const { t } = useTranslation();
+  const name = profile?.user?.name || t("common.user");
 
   return (
     <div className="bg-gradient-to-r from-blue-600 to-green-500 rounded-2xl p-8 text-white shadow-lg">
@@ -15,12 +17,10 @@ const WelcomeCard = ({ profile }) => {
 
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold break-words">
-              Welcome, {name} 👋
+              {t("dashboard.welcome", { name })}
             </h1>
 
-            <p className="mt-2 text-blue-100">
-              Discover government schemes tailored to your profile.
-            </p>
+            <p className="mt-2 text-blue-100">{t("dashboard.welcomeDesc")}</p>
           </div>
         </div>
 
@@ -28,7 +28,7 @@ const WelcomeCard = ({ profile }) => {
           to="/recommendations"
           className="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 hover:bg-blue-50 transition shrink-0"
         >
-          View Recommendations
+          {t("dashboard.viewRecommendations")}
           <FaArrowRight />
         </Link>
       </div>

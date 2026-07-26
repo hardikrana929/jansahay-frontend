@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import MainLayout from "../layouts/MainLayout";
 import Loader from "../components/common/Loader";
@@ -10,6 +11,7 @@ import SchemeDetailsCard from "../components/schemes/SchemeDetailsCard";
 import { getSchemeById } from "../services/schemeService";
 
 const SchemeDetails = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const [loading, setLoading] = useState(true);
@@ -26,21 +28,25 @@ const SchemeDetails = () => {
       // Handles either { scheme: {...} } or the object itself
       setScheme(res.scheme || res);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Unable to load scheme.");
+      toast.error(
+        error.response?.data?.message || t("schemeDetails.unableToLoad"),
+      );
     } finally {
       setLoading(false);
     }
   };
 
   if (loading) {
-    return <Loader text="Loading Scheme..." />;
+    return <Loader text={t("common.loadingScheme")} />;
   }
 
   if (!scheme) {
     return (
       <MainLayout>
         <div className="flex justify-center items-center h-[60vh]">
-          <h2 className="text-2xl font-bold text-red-600">Scheme not found</h2>
+          <h2 className="text-2xl font-bold text-red-600">
+            {t("schemeDetails.notFound")}
+          </h2>
         </div>
       </MainLayout>
     );
@@ -49,8 +55,8 @@ const SchemeDetails = () => {
   return (
     <MainLayout>
       <PageHeader
-        title="Scheme Details"
-        subtitle="Complete information about this government scheme."
+        title={t("schemeDetails.title")}
+        subtitle={t("schemeDetails.subtitle")}
       />
 
       <SchemeDetailsCard scheme={scheme} />
