@@ -112,27 +112,33 @@ const AddScheme = () => {
 
   return (
     <AdminLayout>
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">{t("admin.addSchemeTitle")}</h1>
+      <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+        {t("admin.addSchemeTitle")}
+      </h1>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-2xl shadow-md p-5 sm:p-8 space-y-5 border border-gray-100"
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5 sm:p-8 space-y-5 border border-gray-100 dark:border-gray-700 transition-colors"
       >
         <Input
           label={t("admin.formTitle")}
           name="title"
+          placeholder={t("admin.formTitlePlaceholder")}
           value={form.title}
           onChange={handleChange}
         />
 
         <div className="space-y-2">
-          <label className="font-medium text-gray-700">{t("schemeDetails.description")}</label>
+          <label className="font-medium text-gray-700 dark:text-gray-200">
+            {t("schemeDetails.basicInfo")}
+          </label>
           <textarea
             name="description"
             rows={4}
+            placeholder={t("admin.formDescriptionPlaceholder")}
             value={form.description}
             onChange={handleChange}
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-500"
+            className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-4 py-3 outline-none focus:border-blue-500"
           />
         </div>
 
@@ -157,6 +163,7 @@ const AddScheme = () => {
         <Input
           label={t("admin.formStateOrAll")}
           name="state"
+          placeholder={t("admin.formStatePlaceholder")}
           value={form.state}
           onChange={handleChange}
         />
@@ -166,6 +173,7 @@ const AddScheme = () => {
             label={t("schemes.incomeLimit")}
             name="incomeLimit"
             type="number"
+            placeholder={t("admin.formIncomeLimitPlaceholder")}
             value={form.incomeLimit}
             onChange={handleChange}
           />
@@ -173,6 +181,7 @@ const AddScheme = () => {
             label={t("admin.formMinAge")}
             name="minAge"
             type="number"
+            placeholder="18"
             value={form.minAge}
             onChange={handleChange}
           />
@@ -180,20 +189,21 @@ const AddScheme = () => {
             label={t("admin.formMaxAge")}
             name="maxAge"
             type="number"
+            placeholder="60"
             value={form.maxAge}
             onChange={handleChange}
           />
         </div>
 
         <div>
-          <label className="font-medium text-gray-700 block mb-2">
+          <label className="font-medium text-gray-700 dark:text-gray-200 block mb-2">
             {t("admin.formEligibleCategories")}
           </label>
           <div className="flex flex-wrap gap-3">
             {CATEGORIES.map((c) => (
               <label
                 key={c}
-                className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2"
+                className="flex items-center gap-2 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 rounded-lg px-3 py-2"
               >
                 <input
                   type="checkbox"
@@ -207,14 +217,14 @@ const AddScheme = () => {
         </div>
 
         <div>
-          <label className="font-medium text-gray-700 block mb-2">
+          <label className="font-medium text-gray-700 dark:text-gray-200 block mb-2">
             {t("admin.formEligibleOccupations")}
           </label>
           <div className="flex flex-wrap gap-3">
             {OCCUPATIONS.map((o) => (
               <label
                 key={o}
-                className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2"
+                className="flex items-center gap-2 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 rounded-lg px-3 py-2"
               >
                 <input
                   type="checkbox"
@@ -227,7 +237,7 @@ const AddScheme = () => {
           </div>
         </div>
 
-        <label className="flex items-center gap-2">
+        <label className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
           <input
             type="checkbox"
             name="disabilityRequired"
@@ -238,19 +248,23 @@ const AddScheme = () => {
         </label>
 
         <div className="space-y-2">
-          <label className="font-medium text-gray-700">{t("schemeDetails.benefits")}</label>
+          <label className="font-medium text-gray-700 dark:text-gray-200">
+            {t("schemeDetails.benefits")}
+          </label>
           <textarea
             name="benefits"
             rows={3}
+            placeholder={t("admin.formBenefitsPlaceholder")}
             value={form.benefits}
             onChange={handleChange}
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-500"
+            className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-4 py-3 outline-none focus:border-blue-500"
           />
         </div>
 
         <Input
           label={t("admin.formDocumentsRequired")}
           name="documentsRequired"
+          placeholder={t("admin.formDocumentsRequiredPlaceholder")}
           value={form.documentsRequired}
           onChange={handleChange}
         />
@@ -258,6 +272,7 @@ const AddScheme = () => {
         <Input
           label={t("admin.formOfficialLink")}
           name="officialLink"
+          placeholder="https://"
           value={form.officialLink}
           onChange={handleChange}
         />

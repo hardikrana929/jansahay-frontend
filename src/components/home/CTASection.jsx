@@ -12,7 +12,7 @@ const CTASection = () => {
 
   return (
     <section className="max-w-7xl mx-auto px-5 pb-20">
-      <div className="bg-gradient-to-r from-blue-700 to-green-600 rounded-3xl px-8 py-14 md:py-16 text-center text-white shadow-xl">
+      <div className="bg-gradient-to-r from-blue-700 to-green-600 dark:from-blue-900 dark:to-green-800 rounded-3xl px-8 py-14 md:py-16 text-center text-white shadow-xl transition-colors">
         <h2 className="text-3xl md:text-4xl font-bold">
           {t("home.cta.heading")}
         </h2>
@@ -23,7 +23,7 @@ const CTASection = () => {
 
         <Link
           to="/register"
-          className="inline-flex items-center gap-2 mt-8 bg-white text-blue-700 px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition"
+          className="inline-flex items-center gap-2 mt-8 bg-white text-blue-700 dark:text-blue-800 px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition"
         >
           {t("home.cta.button")}
           <FaArrowRight />

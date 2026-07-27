@@ -74,7 +74,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           h-screen w-72
           bg-gradient-to-b from-blue-700 to-blue-900
           text-white
-          shadow-2xl
+          shadow-2xl dark:shadow-black/40
           transform
           transition-transform
           duration-300

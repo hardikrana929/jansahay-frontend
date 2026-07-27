@@ -52,11 +52,13 @@ const ManageSchemes = () => {
   return (
     <AdminLayout>
       <div className="flex flex-wrap gap-3 items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Manage Schemes</h1>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+          Manage Schemes
+        </h1>
 
         <Link
           to="/admin/add-scheme"
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl transition"
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-5 py-2.5 rounded-xl transition"
         >
           <FaPlus /> Add Scheme
         </Link>
@@ -68,9 +70,9 @@ const ManageSchemes = () => {
           description="Add your first scheme to get started."
         />
       ) : (
-        <div className="bg-white rounded-2xl shadow-md overflow-x-auto border border-gray-100">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-x-auto border border-gray-100 dark:border-gray-700 transition-colors">
           <table className="w-full text-left">
-            <thead className="bg-gray-50 text-gray-600 text-sm">
+            <thead className="bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-300 text-sm">
               <tr>
                 <th className="px-6 py-4">Title</th>
                 <th className="px-6 py-4">Type</th>
@@ -82,18 +84,25 @@ const ManageSchemes = () => {
 
             <tbody>
               {schemes.map((scheme) => (
-                <tr key={scheme._id} className="border-t border-gray-100">
-                  <td className="px-6 py-4 font-medium text-gray-800">
+                <tr
+                  key={scheme._id}
+                  className="border-t border-gray-100 dark:border-gray-700"
+                >
+                  <td className="px-6 py-4 font-medium text-gray-800 dark:text-gray-100">
                     {scheme.title}
                   </td>
-                  <td className="px-6 py-4">{scheme.schemeType}</td>
-                  <td className="px-6 py-4">{scheme.government}</td>
+                  <td className="px-6 py-4 text-gray-700 dark:text-gray-300">
+                    {scheme.schemeType}
+                  </td>
+                  <td className="px-6 py-4 text-gray-700 dark:text-gray-300">
+                    {scheme.government}
+                  </td>
                   <td className="px-6 py-4">
                     <span
                       className={`px-3 py-1 rounded-full text-xs font-semibold ${
                         scheme.isActive
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
+                          ? "bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300"
+                          : "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300"
                       }`}
                     >
                       {scheme.isActive ? "Active" : "Inactive"}
@@ -102,7 +111,7 @@ const ManageSchemes = () => {
                   <td className="px-6 py-4 text-right space-x-3">
                     <Link
                       to={`/admin/edit-scheme/${scheme._id}`}
-                      className="inline-flex items-center gap-1 text-blue-600 hover:underline"
+                      className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline"
                     >
                       <FaEdit /> Edit
                     </Link>

@@ -65,26 +65,30 @@ const Login = () => {
   return (
     <>
       {loading && <Loader text={t("common.pleaseWait")} />}
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex justify-center items-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex justify-center items-center px-4 transition-colors">
         <div className="w-full max-w-md">
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center shadow-lg mb-4">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 dark:from-blue-500 dark:to-blue-700 flex items-center justify-center shadow-lg mb-4">
               <FaHandsHelping className="text-white text-3xl" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-800">{t("nav.name")}</h1>
-            <p className="text-gray-500 text-sm mt-1">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+              {t("nav.name")}
+            </h1>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
               {t("auth.brandTagline")}
             </p>
           </div>
 
           <form
             onSubmit={handleSubmit}
-            className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100"
+            className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-700 transition-colors"
           >
-            <h2 className="text-2xl font-bold text-gray-800 mb-1 text-center">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1 text-center">
               {t("auth.login.welcomeBack")}
             </h2>
-            <p className="text-gray-500 mb-6 text-center">{t("auth.login.subtitle")}</p>
+            <p className="text-gray-500 dark:text-gray-400 mb-6 text-center">
+              {t("auth.login.subtitle")}
+            </p>
 
             <div className="space-y-5">
               <Input
@@ -111,7 +115,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-4 top-[42px] text-gray-400 hover:text-gray-600"
+                  className="absolute right-4 top-[42px] text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                   tabIndex={-1}
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -121,7 +125,7 @@ const Login = () => {
               <div className="text-right -mt-2">
                 <Link
                   to="/forgot-password"
-                  className="text-sm text-blue-600 hover:underline"
+                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   {t("auth.login.forgotPassword")}
                 </Link>
@@ -132,11 +136,11 @@ const Login = () => {
               <Button text={t("auth.login.submit")} loading={loading} />
             </div>
 
-            <p className="text-center text-gray-600 mt-6">
+            <p className="text-center text-gray-600 dark:text-gray-400 mt-6">
               {t("auth.login.noAccount")}
               <Link
                 to="/register"
-                className="text-blue-600 font-medium ml-2 hover:underline"
+                className="text-blue-600 dark:text-blue-400 font-medium ml-2 hover:underline"
               >
                 {t("auth.login.registerLink")}
               </Link>

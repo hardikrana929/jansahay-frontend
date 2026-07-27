@@ -359,7 +359,13 @@
     "filterByRating": "सभी रेटिंग",
     "delete": "हटाएं",
     "deleteConfirm": "क्या आप वाकई इस प्रतिक्रिया को हटाना चाहते हैं?",
-    "deleted": "प्रतिक्रिया हटाई गई"
+    "deleted": "प्रतिक्रिया हटाई गई",
+    "formTitlePlaceholder": "जैसे प्रधानमंत्री आवास योजना",
+    "formDescriptionPlaceholder": "संक्षेप में बताएं कि यह योजना क्या लाभ देती है...",
+    "formStatePlaceholder": "राज्य का नाम, या पूरे देश के लिए 'All' लिखें",
+    "formIncomeLimitPlaceholder": "अधिकतम वार्षिक पारिवारिक आय (₹)",
+    "formBenefitsPlaceholder": "इस योजना के तहत मिलने वाले लाभों का वर्णन करें...",
+    "formDocumentsRequiredPlaceholder": "जैसे आधार कार्ड, आय प्रमाण पत्र, बैंक पासबुक"
   },
   "theme": {
     "light": "हल्का",

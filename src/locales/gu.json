@@ -376,7 +376,13 @@
     "formCreateScheme": "યોજના બનાવો",
 
     "fillAllRequired": "કૃપા કરીને તમામ જરૂરી માહિતી ભરો.",
-    "failedToCreate": "યોજના બનાવવામાં નિષ્ફળતા."
+    "failedToCreate": "યોજના બનાવવામાં નિષ્ફળતા.",
+    "formTitlePlaceholder": "દા.ત. પ્રધાનમંત્રી આવાસ યોજના",
+    "formDescriptionPlaceholder": "આ યોજના શું લાભ આપે છે તે ટૂંકમાં જણાવો...",
+    "formStatePlaceholder": "રાજ્યનું નામ, અથવા સમગ્ર દેશ માટે 'All' લખો",
+    "formIncomeLimitPlaceholder": "મહત્તમ વાર્ષિક કૌટુંબિક આવક (₹)",
+    "formBenefitsPlaceholder": "આ યોજના હેઠળ મળતા લાભોનું વર્ણન કરો...",
+    "formDocumentsRequiredPlaceholder": "દા.ત. આધાર કાર્ડ, આવકનું પ્રમાણપત્ર, બેંક પાસબુક"
   },
   "theme": {
     "light": "હળવો",

@@ -26,6 +26,7 @@ import {
   FaFileAlt,
   FaUserEdit,
 } from "react-icons/fa";
+import Loader from "../components/common/Loader";
 
 const Dashboard = () => {
   const { t } = useTranslation();
@@ -79,6 +80,9 @@ const Dashboard = () => {
       setLoading(false);
     }
   };
+  if (loading) {
+    return <Loader text={t("common.loadingDashboard")} />;
+  }
 
   return (
     <MainLayout>

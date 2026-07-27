@@ -117,7 +117,7 @@ const Navbar = () => {
           <Link
             to="/"
             onClick={closeMenu}
-            className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
+            className={`${token ? "hidden" : "block"} py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800`}
           >
             {t("nav.home")}
           </Link>

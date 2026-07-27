@@ -27,7 +27,7 @@ const Hero = () => {
     : t("home.hero.browseSchemes");
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-green-500 text-white">
+    <section className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-green-500 dark:from-blue-900 dark:via-blue-800 dark:to-green-800 text-white transition-colors">
       {/* Decorative background shapes */}
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
       <div className="absolute -bottom-32 -left-16 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
@@ -56,7 +56,7 @@ const Hero = () => {
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               to={primaryLink}
-              className="inline-flex items-center gap-2 bg-white text-blue-700 px-7 py-3.5 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition"
+              className="inline-flex items-center gap-2 bg-white text-blue-700 dark:text-blue-800 px-7 py-3.5 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition"
             >
               {primaryText}
               <FaArrowRight />

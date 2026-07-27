@@ -7,7 +7,11 @@ const StarDisplay = ({ rating = 0, size = 14 }) => {
         <FaStar
           key={star}
           size={size}
-          className={rating >= star ? "text-yellow-400" : "text-gray-300"}
+          className={
+            rating >= star
+              ? "text-yellow-400"
+              : "text-gray-300 dark:text-gray-600"
+          }
         />
       ))}
     </div>

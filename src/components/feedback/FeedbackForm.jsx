@@ -46,7 +46,9 @@ const FeedbackForm = () => {
 
       setSubmitted(true);
     } catch (error) {
-      toast.error(error.response?.data?.message || t("feedback.unableToSubmit"));
+      toast.error(
+        error.response?.data?.message || t("feedback.unableToSubmit"),
+      );
     } finally {
       setLoading(false);
     }
@@ -61,23 +63,23 @@ const FeedbackForm = () => {
 
   if (submitted) {
     return (
-      <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-12">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 p-12 transition-colors">
         <div className="flex flex-col items-center justify-center text-center">
-          <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center">
+          <div className="w-24 h-24 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center">
             <FaCheckCircle className="text-5xl text-green-500" />
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-800 mt-6">
+          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-6">
             {t("feedback.successTitle")}
           </h2>
 
-          <p className="text-gray-500 mt-3 max-w-md">
+          <p className="text-gray-500 dark:text-gray-400 mt-3 max-w-md">
             {t("feedback.successDesc")}
           </p>
 
           <button
             onClick={handleReset}
-            className="mt-8 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl transition"
+            className="mt-8 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-8 py-3 rounded-xl transition"
           >
             {t("feedback.submitAnother")}
           </button>
@@ -89,11 +91,11 @@ const FeedbackForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl shadow-md border border-gray-100 p-6 sm:p-8 space-y-6"
+      className="bg-white dark:bg-gray-800 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700 p-6 sm:p-8 space-y-6 transition-colors"
     >
       {/* Rating */}
       <div className="space-y-2">
-        <label className="font-medium text-gray-700">
+        <label className="font-medium text-gray-700 dark:text-gray-200">
           {t("feedback.ratingLabel")}
         </label>
 
@@ -111,7 +113,7 @@ const FeedbackForm = () => {
 
       {/* Message */}
       <div className="space-y-2">
-        <label className="font-medium text-gray-700">
+        <label className="font-medium text-gray-700 dark:text-gray-200">
           {t("feedback.messageLabel")}
         </label>
 
@@ -120,7 +122,7 @@ const FeedbackForm = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={t("feedback.messagePlaceholder")}
-          className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 outline-none transition focus:border-blue-500 resize-none"
+          className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 px-4 py-3 outline-none transition focus:border-blue-500 resize-none"
         />
       </div>
 

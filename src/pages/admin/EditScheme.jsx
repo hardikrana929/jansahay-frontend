@@ -143,7 +143,7 @@ const EditScheme = () => {
   return (
     <AdminLayout>
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100">
           {t("admin.editSchemeTitle")}
         </h1>
 
@@ -151,8 +151,8 @@ const EditScheme = () => {
           <span
             className={`px-3 py-1 rounded-full text-xs font-semibold ${
               isActive
-                ? "bg-green-100 text-green-700"
-                : "bg-red-100 text-red-700"
+                ? "bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300"
+                : "bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300"
             }`}
           >
             {isActive ? t("admin.active") : t("admin.inactive")}
@@ -175,7 +175,7 @@ const EditScheme = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-2xl shadow-md p-4 sm:p-6 lg:p-8 space-y-5 border border-gray-100"
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-4 sm:p-6 lg:p-8 space-y-5 border border-gray-100 dark:border-gray-700 transition-colors"
       >
         <Input
           label={t("admin.formTitle")}
@@ -185,7 +185,7 @@ const EditScheme = () => {
         />
 
         <div className="space-y-2">
-          <label className="font-medium text-gray-700">
+          <label className="font-medium text-gray-700 dark:text-gray-200">
             {t("schemeDetails.description")}
           </label>
           <textarea
@@ -193,7 +193,7 @@ const EditScheme = () => {
             rows={4}
             value={form.description}
             onChange={handleChange}
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-500"
+            className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-4 py-3 outline-none focus:border-blue-500"
           />
         </div>
 
@@ -247,7 +247,7 @@ const EditScheme = () => {
         </div>
 
         <div className="space-y-2">
-          <label className="font-medium text-gray-700">
+          <label className="font-medium text-gray-700 dark:text-gray-200">
             {t("schemeDetails.benefits")}
           </label>
           <textarea
@@ -255,7 +255,7 @@ const EditScheme = () => {
             rows={3}
             value={form.benefits}
             onChange={handleChange}
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-500"
+            className="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-4 py-3 outline-none focus:border-blue-500"
           />
         </div>
 

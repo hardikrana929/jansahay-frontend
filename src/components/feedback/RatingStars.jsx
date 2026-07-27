@@ -19,7 +19,9 @@ const RatingStars = ({ value = 0, onChange, size = 32 }) => {
           <FaStar
             size={size}
             className={
-              (hover || value) >= star ? "text-yellow-400" : "text-gray-300"
+              (hover || value) >= star
+                ? "text-yellow-400"
+                : "text-gray-300 dark:text-gray-600"
             }
           />
         </button>

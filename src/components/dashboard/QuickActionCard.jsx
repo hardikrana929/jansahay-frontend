@@ -5,7 +5,7 @@ const QuickActionCard = ({ title, icon, link, color }) => {
   return (
     <Link
       to={link}
-      className={`${color} rounded-2xl p-6 text-white shadow-md dark:shadow-black/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}
+      className={`${color} rounded-2xl p-6 text-white shadow-md dark:shadow-black/40 border border-transparent dark:border-white/10 hover:shadow-xl dark:hover:shadow-black/60 hover:-translate-y-1 transition-all duration-300`}
     >
       <div className="flex justify-between items-center">
         <div>
