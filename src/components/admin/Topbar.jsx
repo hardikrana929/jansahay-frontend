@@ -24,13 +24,13 @@ const Topbar = ({ admin }) => {
         {/* Right */}
 
         <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-6">
-          <button className="relative shrink-0">
+          {/* <button className="relative shrink-0">
             <FaBell className="text-2xl text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition" />
 
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] rounded-full px-1.5 py-0.5">
               3
             </span>
-          </button>
+          </button> */}
 
           <div className="flex items-center gap-3 min-w-0">
             <FaUserCircle className="text-4xl text-blue-600 dark:text-blue-400 shrink-0" />

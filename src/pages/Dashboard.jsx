@@ -143,7 +143,7 @@ const Dashboard = () => {
           />
 
           <QuickActionCard
-            title={t("dashboard.viewScheme")}
+            title={t("dashboard.viewSchemes")}
             icon={<FaFileAlt size={30} />}
             color="bg-green-600"
             link="/schemes"
