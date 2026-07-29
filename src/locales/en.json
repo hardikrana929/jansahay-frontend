@@ -198,6 +198,7 @@
     "female": "Female",
     "other": "Other",
     "state": "State",
+    "general":"General",
     "district": "District",
     "maritalStatus": "Marital Status",
     "single": "Single",
