@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { FaArrowLeftLong } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import {
   FaEnvelope,
@@ -17,6 +18,9 @@ import Loader from "../components/common/Loader";
 
 const Login = () => {
   const navigate = useNavigate();
+  const backToHome = () =>{
+    navigate('/')
+  }
   const { login } = useAuth();
   const { t } = useTranslation();
 
@@ -83,6 +87,11 @@ const Login = () => {
             onSubmit={handleSubmit}
             className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-700 transition-colors"
           >
+            {/* Go to Home */}
+            <div onClick={backToHome} className="text-black flex items-center font-bold gap-3 mb-3 cursor-pointer  dark:bg-gray-800 transition-colors">
+              <FaArrowLeftLong  size={20}/>
+              <p>Back to Home Page</p>
+            </div>
             <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1 text-center">
               {t("auth.login.welcomeBack")}
             </h2>
