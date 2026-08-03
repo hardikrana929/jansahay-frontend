@@ -39,6 +39,7 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
             value={formData.age}
             onChange={handleChange}
             icon={FaUser}
+            placeholder={t("profile.agePlaceholder")}
           />
 
           <SelectInput
@@ -60,6 +61,7 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
             value={formData.state}
             onChange={handleChange}
             icon={FaMapMarkerAlt}
+            placeholder={t("profile.statePlaceholder")}
           />
 
           <Input
@@ -68,6 +70,7 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
             value={formData.district}
             onChange={handleChange}
             icon={FaCity}
+            placeholder={t("profile.districtPlaceholder")}
           />
 
           <SelectInput
@@ -115,6 +118,7 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
             value={formData.education}
             onChange={handleChange}
             icon={FaGraduationCap}
+            placeholder={t("profile.educationPlaceholder")}
           />
 
           <Input
@@ -124,6 +128,7 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
             value={formData.familyIncome}
             onChange={handleChange}
             icon={FaWallet}
+            placeholder={t("profile.familyIncomePlaceholder")}
           />
 
           <SelectInput
@@ -134,10 +139,10 @@ const ProfileForm = ({ formData, handleChange, handleSubmit, loading }) => {
             icon={FaUsers}
             options={[
               { value: "General", label: t("profile.general") },
-              { value: "OBC", label: "OBC" },
-              { value: "SC", label: "SC" },
-              { value: "ST", label: "ST" },
-              { value: "EWS", label: "EWS" },
+              { value: "OBC", label: t("profile.obc") },
+              { value: "SC", label: t("profile.sc") },
+              { value: "ST", label: t("profile.st") },
+              { value: "EWS", label: t("profile.ews") },
             ]}
           />
         </div>

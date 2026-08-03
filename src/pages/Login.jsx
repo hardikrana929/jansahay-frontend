@@ -88,7 +88,7 @@ const Login = () => {
             className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100 dark:border-gray-700 transition-colors"
           >
             {/* Go to Home */}
-            <div onClick={backToHome} className="text-black flex items-center font-bold gap-3 mb-3 cursor-pointer  dark:bg-gray-800 transition-colors">
+            <div onClick={backToHome} className="text-black flex items-center font-bold gap-3 mb-3 cursor-pointer dark:text-white dark:bg-gray-800 transition-colors">
               <FaArrowLeftLong  size={20}/>
               <p>Back to Home Page</p>
             </div>

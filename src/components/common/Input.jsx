@@ -8,17 +8,19 @@ const Input = ({ label, icon: Icon, error, ...props }) => {
       </label>
 
       <div
-        className={`flex items-center rounded-xl border bg-white dark:bg-gray-800 px-4 py-3 transition
+        className={`flex items-center rounded-xl border bg-white dark:bg-gray-900 px-4 py-3 transition
         ${
           error
             ? "border-red-500"
-            : "border-gray-300 dark:border-gray-600 focus-within:border-blue-500"
+            : "border-gray-300 dark:border-gray-700 focus-within:border-blue-500"
         }`}
       >
-        {Icon && <Icon className="mr-3 text-gray-400" size={18} />}
+        {Icon && (
+          <Icon className="mr-3 text-gray-400 dark:text-gray-500" size={18} />
+        )}
 
         <input
-          className="flex-1 outline-none bg-transparent text-gray-900 dark:text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+          className="flex-1 outline-none bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
           {...props}
         />
       </div>

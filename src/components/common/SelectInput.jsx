@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 const SelectInput = ({
   label,
   name,
@@ -7,6 +9,8 @@ const SelectInput = ({
   icon: Icon,
   error,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-2">
       {label && (
@@ -16,25 +20,33 @@ const SelectInput = ({
       )}
 
       <div
-        className={`flex items-center rounded-xl border bg-white dark:bg-gray-800 px-4 py-3 transition
+        className={`flex items-center rounded-xl border bg-white dark:bg-gray-900 px-4 py-3 transition
         ${
           error
             ? "border-red-500"
-            : "border-gray-300 dark:border-gray-600 focus-within:border-blue-500"
+            : "border-gray-300 dark:border-gray-700 focus-within:border-blue-500"
         }`}
       >
-        {Icon && <Icon className="mr-3 text-gray-400" size={18} />}
+        {Icon && (
+          <Icon className="mr-3 text-gray-400 dark:text-gray-500" size={18} />
+        )}
 
         <select
           name={name}
           value={value}
           onChange={onChange}
-          className="flex-1 outline-none bg-transparent text-gray-900 dark:text-gray-100"
+          className="flex-1 outline-none bg-transparent text-gray-800 dark:text-gray-100"
         >
-          <option value="">Select</option>
+          <option value="" className="dark:bg-gray-900">
+            {t("common.select")}
+          </option>
 
           {options.map((item) => (
-            <option key={item.value} value={item.value}>
+            <option
+              key={item.value}
+              value={item.value}
+              className="dark:bg-gray-900"
+            >
               {item.label}
             </option>
           ))}

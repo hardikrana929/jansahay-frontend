@@ -165,6 +165,7 @@
     "state": "राज्य सरकार",
     "latestFirst": "नवीनतम पहले",
     "oldestFirst": "सबसे पुराना पहले",
+    "select": "चुनें",
     "backToDashboard": "डैशबोर्ड पर वापस जाएं",
     "somethingWrong": "कुछ गलत हो गया"
   },
@@ -222,7 +223,16 @@
     "disability": "विकलांगता",
     "saveProfile": "प्रोफ़ाइल सहेजें",
     "saving": "सहेजा जा रहा है...",
-    "somethingWrong": "कुछ गलत हो गया"
+    "somethingWrong": "कुछ गलत हो गया",
+    "agePlaceholder": "अपनी आयु दर्ज करें",
+    "statePlaceholder": "अपना राज्य दर्ज करें",
+    "districtPlaceholder": "अपना जिला दर्ज करें",
+    "obc": "सामाजिक एवं शैक्षणिक रूप से पिछड़ा वर्ग",
+    "sc": "अनुसूचित जाति",
+    "st": "अनुसूचित जनजाति",
+    "ews": "आर्थिक रूप से कमजोर वर्ग",
+    "educationPlaceholder": "जैसे स्नातक डिग्री, 12वीं पास",
+    "familyIncomePlaceholder": "वार्षिक पारिवारिक आय दर्ज करें"
   },
   "completeProfile": {
     "title": "अपनी प्रोफ़ाइल पूरी करें",

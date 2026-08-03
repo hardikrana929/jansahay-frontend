@@ -164,6 +164,7 @@
     "central": "Central Government",
     "state": "State Government",
     "latestFirst": "Latest First",
+    "select": "Select",
     "oldestFirst": "Oldest First",
     "backToDashboard": "Back to Dashboard",
     "somethingWrong": "Something went wrong"
@@ -198,7 +199,7 @@
     "female": "Female",
     "other": "Other",
     "state": "State",
-    "general":"General",
+    "general": "General",
     "district": "District",
     "maritalStatus": "Marital Status",
     "single": "Single",
@@ -222,7 +223,12 @@
     "disability": "Disability",
     "saveProfile": "Save Profile",
     "saving": "Saving...",
-    "somethingWrong": "Something went wrong"
+    "somethingWrong": "Something went wrong",
+    "agePlaceholder": "Enter your age",
+    "statePlaceholder": "Enter your state",
+    "districtPlaceholder": "Enter your district",
+    "educationPlaceholder": "e.g. Bachelor's Degree, 12th Pass",
+    "familyIncomePlaceholder": "Enter annual family income"
   },
   "completeProfile": {
     "title": "Complete Your Profile",
