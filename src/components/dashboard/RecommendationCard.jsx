@@ -20,9 +20,9 @@ const RecommendationCard = ({ scheme }) => {
       </p>
 
       <div className="flex flex-wrap gap-3 mt-5">
-        <span className="bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-sm">
-          {scheme.categorys}
-        </span>
+        {/* <span className="bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-sm">
+          {scheme.category}          
+        </span> */}
 
         <span className="bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 px-3 py-1 rounded-full text-sm flex items-center gap-1">
           <FaMapMarkerAlt />

@@ -57,11 +57,6 @@ const Dashboard = () => {
           getSchemes(),
         ]);
 
-      console.log("Profile:", profileRes);
-      console.log("Recommendations:", recommendationRes);
-      console.log("Favorites:", favoriteRes);
-      console.log("Schemes:", schemeRes);
-
       setProfile(profileRes.profile || null);
 
       // Recommendation API returns "recommendation"

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
@@ -22,6 +22,22 @@ const Navbar = () => {
 
   const closeMenu = () => setIsOpen(false);
 
+  // Desktop tab: underline + color when active
+  const desktopLinkClass = ({ isActive }) =>
+    `relative pb-1 transition border-b-2 ${
+      isActive
+        ? "text-blue-600 bg-blue-50 dark:text-blue-400 font-semibold border-blue-600 border-l-2 rounded-lg p-1 dark:border-blue-400"
+        : "text-gray-700 dark:text-gray-200 border-transparent hover:text-blue-600 dark:hover:text-blue-400"
+    }`;
+
+  // Mobile tab: filled highlight + left accent bar when active
+  const mobileLinkClass = ({ isActive }) =>
+    `py-3 px-3 rounded-lg border-l-4 transition ${
+      isActive
+        ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-semibold  border-blue-600 dark:border-blue-400"
+        : "border-transparent hover:bg-gray-50 dark:hover:bg-gray-800"
+    }`;
+
   return (
     <nav className="bg-white dark:bg-gray-900 dark:text-gray-100 shadow sticky top-0 z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-5 py-4 flex justify-between items-center">
@@ -43,23 +59,37 @@ const Navbar = () => {
 
         {/* Desktop menu */}
         <div className="hidden lg:flex gap-6 items-center">
-          <Link to="/" className={token ? "hidden" : "block"}>
-            {t("nav.home")}
-          </Link>
+          <NavLink to="/" end className={desktopLinkClass}>
+            {({ isActive }) => (
+              <span className={token ? "hidden" : "block"}>
+                {t("nav.home")}
+              </span>
+            )}
+          </NavLink>
 
-          <Link to="/schemes">{t("nav.schemes")}</Link>
+          <NavLink to="/schemes" className={desktopLinkClass}>
+            {t("nav.schemes")}
+          </NavLink>
 
           {user && (
             <>
-              <Link
+              <NavLink
                 to={user.role === "admin" ? "/admin/dashboard" : "/dashboard"}
+                className={desktopLinkClass}
               >
                 {t("nav.dashboard")}
-              </Link>
+              </NavLink>
 
-              <Link to="/recommendations">{t("nav.recommendations")}</Link>
+              <NavLink to="/recommendations" className={desktopLinkClass}>
+                {t("nav.recommendations")}
+              </NavLink>
 
-              <Link to="/favorites">{t("nav.favorites")}</Link>
+              <NavLink to="/favorites" className={desktopLinkClass}>
+                {t("nav.favorites")}
+              </NavLink>
+              <NavLink to="/feedback" className={desktopLinkClass}>
+                {t("nav.feedback")}
+              </NavLink>
             </>
           )}
 
@@ -84,7 +114,7 @@ const Navbar = () => {
 
               <button
                 onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                className="bg-red-500 text-white px-4 py-2 rounded-lg cursor-pointer"
               >
                 {t("nav.logout")}
               </button>
@@ -114,47 +144,57 @@ const Navbar = () => {
         }`}
       >
         <div className="px-4 sm:px-5 pb-5 pt-1 flex flex-col gap-1 border-t border-gray-100 dark:border-gray-700">
-          <Link
+          <NavLink
             to="/"
+            end
             onClick={closeMenu}
-            className={`${token ? "hidden" : "block"} py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800`}
+            className={({ isActive }) =>
+              `${token ? "hidden" : "block"} ${mobileLinkClass({ isActive })}`
+            }
           >
             {t("nav.home")}
-          </Link>
+          </NavLink>
 
-          <Link
+          <NavLink
             to="/schemes"
             onClick={closeMenu}
-            className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
+            className={mobileLinkClass}
           >
             {t("nav.schemes")}
-          </Link>
+          </NavLink>
 
           {user && (
             <>
-              <Link
+              <NavLink
                 to={user.role === "admin" ? "/admin/dashboard" : "/dashboard"}
                 onClick={closeMenu}
-                className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
+                className={mobileLinkClass}
               >
                 {t("nav.dashboard")}
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/recommendations"
                 onClick={closeMenu}
-                className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
+                className={mobileLinkClass}
               >
                 {t("nav.recommendations")}
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/favorites"
                 onClick={closeMenu}
-                className="py-3 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
+                className={mobileLinkClass}
               >
                 {t("nav.favorites")}
-              </Link>
+              </NavLink>
+              <NavLink
+                to="/feedback"
+                onClick={closeMenu}
+                className={mobileLinkClass}
+              >
+                {t("nav.feedback")}
+              </NavLink>
             </>
           )}
 
@@ -182,7 +222,7 @@ const Navbar = () => {
 
               <button
                 onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2.5 rounded-lg shrink-0"
+                className="bg-red-500 text-white px-4 py-2.5 rounded-lg shrink-0 cursor-pointer"
               >
                 {t("nav.logout")}
               </button>
